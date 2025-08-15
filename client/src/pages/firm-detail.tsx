@@ -3,6 +3,7 @@ import { useRoute } from "wouter";
 import { useEffect } from "react";
 import Header from "@/components/header";
 import CountdownTimer from "@/components/countdown-timer";
+import EvaluationSteps from "@/components/evaluation-steps";
 import { useClipboard } from "@/hooks/use-clipboard";
 import { useI18n } from "@/lib/i18n";
 import { useSEO } from "@/lib/seo";
@@ -57,18 +58,18 @@ export default function FirmDetail() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-background">
         <Header />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="animate-pulse">
-            <div className="h-8 bg-gray-300 rounded w-1/4 mb-4"></div>
-            <div className="h-32 bg-gray-300 rounded mb-8"></div>
+            <div className="h-8 bg-muted rounded w-1/4 mb-4"></div>
+            <div className="h-32 bg-muted rounded mb-8"></div>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
               <div className="lg:col-span-2 space-y-6">
-                <div className="h-64 bg-gray-300 rounded"></div>
-                <div className="h-48 bg-gray-300 rounded"></div>
+                <div className="h-64 bg-muted rounded"></div>
+                <div className="h-48 bg-muted rounded"></div>
               </div>
-              <div className="h-96 bg-gray-300 rounded"></div>
+              <div className="h-96 bg-muted rounded"></div>
             </div>
           </div>
         </div>
@@ -78,12 +79,12 @@ export default function FirmDetail() {
 
   if (error || !firm) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-background">
         <Header />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="text-center">
-            <h1 className="text-2xl font-bold text-red-600 mb-4">{t('errors.firmNotFound')}</h1>
-            <p className="text-gray-600">{t('errors.checkUrl')}</p>
+            <h1 className="text-2xl font-bold text-destructive mb-4">Firm not found</h1>
+            <p className="text-muted-foreground">The requested firm could not be found.</p>
           </div>
         </div>
       </div>
@@ -120,17 +121,17 @@ export default function FirmDetail() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-background">
       <Header />
       
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Breadcrumbs */}
-        <div className="flex items-center text-sm text-gray-500 mb-6">
-          <a href={`/${locale}`} className="hover:text-gray-700">{t('nav.home')}</a>
+        <div className="flex items-center text-sm text-muted-foreground mb-6">
+          <a href={`/${locale}`} className="hover:text-foreground">{t('nav.home')}</a>
           <i className="fas fa-chevron-right mx-2 text-xs"></i>
-          <a href={`/${locale}`} className="hover:text-gray-700">{t('nav.rankings')}</a>
+          <a href={`/${locale}`} className="hover:text-foreground">{t('nav.rankings')}</a>
           <i className="fas fa-chevron-right mx-2 text-xs"></i>
-          <span className="text-gray-900 font-medium">{firm.name}</span>
+          <span className="text-foreground font-medium">{firm.name}</span>
         </div>
 
         {/* Hero Section */}
@@ -138,7 +139,7 @@ export default function FirmDetail() {
           <CardContent className="p-8">
             <div className="flex flex-col md:flex-row items-start gap-6">
               {/* Firm Logo */}
-              <div className="w-24 h-24 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl flex items-center justify-center text-white font-bold text-2xl flex-shrink-0">
+              <div className="w-16 h-16 md:w-24 md:h-24 bg-gradient-to-br from-primary to-primary/80 rounded-xl flex items-center justify-center text-primary-foreground font-bold text-xl md:text-2xl flex-shrink-0">
                 {firm.logoUrl ? (
                   <img src={firm.logoUrl} alt={firm.name} className="w-full h-full object-cover rounded-xl" />
                 ) : (
@@ -148,48 +149,51 @@ export default function FirmDetail() {
 
               {/* Firm Info */}
               <div className="flex-1">
-                <div className="flex items-center gap-3 mb-4">
-                  <h1 className="text-3xl font-bold text-gray-900" data-testid="firm-name">
+                <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 mb-4">
+                  <h1 className="text-2xl md:text-3xl font-bold text-foreground" data-testid="firm-name">
                     {firm.name}
                   </h1>
-                  {firm.featured && (
-                    <Badge variant="secondary" className="bg-accent-500 text-white">
-                      <i className="fas fa-star mr-1"></i>
-                      {t('labels.featured')}
-                    </Badge>
-                  )}
-                  {activePromotion && (
-                    <Badge variant="destructive" className="bg-warning-500 text-white">
-                      <i className="fas fa-clock mr-1"></i>
-                      <CountdownTimer endTime={activePromotion.endsAt} />
-                    </Badge>
-                  )}
+                  <div className="flex flex-wrap gap-2">
+                    {firm.featured && (
+                      <Badge variant="secondary" className="bg-accent text-accent-foreground">
+                        <i className="fas fa-star mr-1"></i>
+                        {t('labels.featured')}
+                      </Badge>
+                    )}
+                    {activePromotion && (
+                      <Badge variant="destructive">
+                        <i className="fas fa-clock mr-1"></i>
+                        <CountdownTimer endTime={activePromotion.endsAt} />
+                      </Badge>
+                    )}
+                  </div>
                 </div>
 
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
-                  <div className="text-center">
-                    <div className="text-lg font-bold text-gray-900">{firm.payoutSplit}</div>
-                    <div className="text-sm text-gray-500">{t('labels.payoutSplit')}</div>
+                  <div className="text-center p-3 bg-muted/50 rounded-lg">
+                    <div className="text-lg font-bold text-foreground">{firm.payoutSplit}</div>
+                    <div className="text-sm text-muted-foreground">{t('labels.payoutSplit')}</div>
                   </div>
-                  <div className="text-center">
-                    <div className="text-lg font-bold text-gray-900">{firm.earliestPayoutDays}d</div>
-                    <div className="text-sm text-gray-500">{t('labels.payout')}</div>
+                  <div className="text-center p-3 bg-muted/50 rounded-lg">
+                    <div className="text-lg font-bold text-foreground">{firm.earliestPayoutDays}d</div>
+                    <div className="text-sm text-muted-foreground">{t('labels.payout')}</div>
                   </div>
-                  <div className="text-center">
-                    <div className="text-lg font-bold text-gray-900">
+                  <div className="text-center p-3 bg-muted/50 rounded-lg">
+                    <div className="text-lg font-bold text-foreground">
                       ⭐ {firm.rating ? Number(firm.rating).toFixed(1) : 'N/A'}
                     </div>
-                    <div className="text-sm text-gray-500">{t('labels.rating')}</div>
+                    <div className="text-sm text-muted-foreground">{t('labels.rating')}</div>
                   </div>
-                  <div className="text-center">
-                    <div className="text-lg font-bold text-gray-900">
-                      {firm.platforms?.join(', ') || 'MT4/MT5'}
+                  <div className="text-center p-3 bg-muted/50 rounded-lg">
+                    <div className="text-sm font-bold text-foreground">
+                      {firm.platforms?.slice(0, 2).join(', ') || 'MT4/MT5'}
+                      {firm.platforms && firm.platforms.length > 2 && '...'}
                     </div>
-                    <div className="text-sm text-gray-500">{t('labels.platforms')}</div>
+                    <div className="text-sm text-muted-foreground">{t('labels.platforms')}</div>
                   </div>
                 </div>
 
-                <p className="text-gray-600" data-testid="firm-description">
+                <p className="text-muted-foreground" data-testid="firm-description">
                   {getLocalizedDescription()}
                 </p>
               </div>
@@ -197,9 +201,23 @@ export default function FirmDetail() {
           </CardContent>
         </Card>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        {/* Evaluation Steps */}
+        <EvaluationSteps 
+          firm={{
+            name: firm.name,
+            evaluationSteps: firm.evaluationSteps || 2,
+            maxDailyLoss: firm.maxDailyLoss || "5%",
+            maxTotalLoss: firm.maxTotalLoss || "10%",
+            profitTarget: firm.profitTarget || "10%", 
+            minTradingDays: firm.minTradingDays || 10,
+            consistencyRule: firm.consistencyRule,
+            activationFee: Number(firm.activationFee) || 0
+          }}
+        />
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
           {/* Main Content */}
-          <div className="lg:col-span-2 space-y-8">
+          <div className="lg:col-span-2 space-y-6 lg:space-y-8">
             {/* Trading Rules */}
             <Card>
               <CardHeader>

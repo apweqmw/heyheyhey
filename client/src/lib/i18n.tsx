@@ -24,11 +24,11 @@ const translations = {
     // Home page
     'home.title': 'Best Prop Trading Firms 2024',
     'home.subtitle': 'Compare {{count}} prop firms with exclusive discount codes and real-time pricing.',
-    'home.seo.title': 'Best Prop Trading Firms 2024 - Compare Prices & Discounts | PropRank',
+    'home.seo.title': 'Best Prop Trading Firms 2024 - Compare Prices & Discounts | PropFirmMentor',
     'home.seo.description': 'Compare the best prop trading firms with exclusive discount codes and real-time pricing. Find your perfect trading challenge with our comprehensive ranking.',
     
     // Firm detail
-    'firmDetail.seo.title': '{{firmName}} Review & Discount Codes | PropRank',
+    'firmDetail.seo.title': '{{firmName}} Review & Discount Codes | PropFirmMentor',
     'firmDetail.seo.description': 'Get the latest {{firmName}} discount codes, pricing, and trading rules. Compare account sizes and find the best deal.',
     'firmDetail.rules.title': 'Trading Rules & Requirements',
     'firmDetail.rules.noRules': 'Trading rules not available',

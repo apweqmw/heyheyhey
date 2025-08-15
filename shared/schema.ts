@@ -27,6 +27,15 @@ export const firms = pgTable("firms", {
   referralLink: text("referral_link"),
   couponCode: varchar("coupon_code"),
   
+  // Trading evaluation details
+  evaluationSteps: integer("evaluation_steps").default(2), // Usually 1 or 2 step process
+  maxDailyLoss: varchar("max_daily_loss"), // e.g., "5%" or "$2,000"
+  maxTotalLoss: varchar("max_total_loss"), // e.g., "10%" or "$5,000"
+  profitTarget: varchar("profit_target"), // e.g., "10%" or "$10,000"
+  minTradingDays: integer("min_trading_days"),
+  consistencyRule: text("consistency_rule"), // Description of consistency requirements
+  activationFee: decimal("activation_fee", { precision: 10, scale: 2 }), // Fee to activate funded account
+  
   // Localized descriptions
   descriptionEn: text("description_en"),
   descriptionKo: text("description_ko"),

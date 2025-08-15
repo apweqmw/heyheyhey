@@ -99,12 +99,12 @@ export default function Home() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-background">
         <Header />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="text-center">
-            <h1 className="text-2xl font-bold text-red-600 mb-4">{t('errors.loadFailed')}</h1>
-            <p className="text-gray-600">{t('errors.tryAgain')}</p>
+            <h1 className="text-2xl font-bold text-destructive mb-4">{t('errors.loadFailed')}</h1>
+            <p className="text-muted-foreground">{t('errors.tryAgain')}</p>
           </div>
         </div>
       </div>
@@ -112,11 +112,11 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-background">
       <Header />
       <FilterSortBar filters={filters} onFiltersChange={setFilters} />
       
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 md:py-8">
         {/* Page Header */}
         <div className="mb-8">
           <div className="flex items-center text-sm text-gray-500 mb-4">

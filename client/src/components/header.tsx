@@ -3,6 +3,7 @@ import { Link, useLocation } from "wouter";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import LanguageSwitcher from "./language-switcher";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { useI18n } from "@/lib/i18n";
 
 export default function Header() {
@@ -27,7 +28,7 @@ export default function Header() {
   };
 
   return (
-    <header className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-40">
+    <header className="bg-card shadow-sm border-b border-border sticky top-0 z-40 backdrop-blur-md bg-card/95">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo & Navigation */}
@@ -36,7 +37,7 @@ export default function Header() {
               <div className="bg-primary-500 text-white p-2 rounded-lg mr-3">
                 <i className="fas fa-chart-line text-xl"></i>
               </div>
-              <span className="text-2xl font-bold text-gray-900">PropRank</span>
+              <span className="text-2xl font-bold text-foreground">PropFirmMentor</span>
             </Link>
             
             <nav className="hidden md:flex space-x-6">
@@ -72,6 +73,9 @@ export default function Header() {
               <i className="fas fa-search absolute left-3 top-3 text-gray-400"></i>
             </form>
 
+            {/* Theme Toggle */}
+            <ThemeToggle />
+            
             {/* Language Switcher */}
             <LanguageSwitcher />
 
