@@ -34,7 +34,7 @@ export default function Header() {
           {/* Logo & Navigation */}
           <div className="flex items-center space-x-8">
             <Link href={`/${locale}`} className="flex items-center" data-testid="logo-link">
-              <div className="bg-primary-500 text-white p-2 rounded-lg mr-3">
+              <div className="bg-primary text-primary-foreground p-2 rounded-lg mr-3">
                 <i className="fas fa-chart-line text-xl"></i>
               </div>
               <span className="text-2xl font-bold text-foreground">PropFirmMentor</span>
@@ -47,8 +47,8 @@ export default function Header() {
                   href={item.href}
                   className={`${
                     item.current
-                      ? 'text-gray-900 font-medium border-b-2 border-primary-500 pb-1'
-                      : 'text-gray-600 hover:text-gray-900 transition-colors'
+                      ? 'text-foreground font-medium border-b-2 border-primary pb-1'
+                      : 'text-muted-foreground hover:text-foreground transition-colors'
                   }`}
                   data-testid={`nav-${item.name.toLowerCase()}`}
                 >
@@ -67,10 +67,10 @@ export default function Header() {
                 placeholder={t('header.searchPlaceholder')}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-64 pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                className="w-64 pl-10 pr-4 py-2 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
                 data-testid="search-input"
               />
-              <i className="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+              <i className="fas fa-search absolute left-3 top-3 text-muted-foreground"></i>
             </form>
 
             {/* Theme Toggle */}

@@ -224,6 +224,7 @@ export class DatabaseStorage implements IStorage {
       })),
       promotions,
       currentDiscount,
+      finalPrice: accounts.length > 0 ? Number(accounts[0].basePrice) * (1 - currentDiscount / 100) : 0,
       countdownEndTime: activePromotion?.endsAt?.toISOString(),
     };
   }
