@@ -37,7 +37,7 @@ export default function Header() {
               <div className="bg-primary text-primary-foreground p-2 rounded-lg mr-2 sm:mr-3">
                 <i className="fas fa-chart-line text-lg sm:text-xl"></i>
               </div>
-              <span className="text-lg sm:text-xl md:text-2xl font-bold text-foreground truncate max-w-[120px] sm:max-w-none">
+              <span className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-foreground whitespace-nowrap">
                 PropFirmMentor
               </span>
             </Link>

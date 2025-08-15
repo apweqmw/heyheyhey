@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -18,6 +18,23 @@ export default function FirmListing({ firms, isLoading }: FirmListingProps) {
   const { locale, t } = useI18n();
   const { copyToClipboard } = useClipboard();
   const [loadingMore, setLoadingMore] = useState(false);
+  const [displayedCount, setDisplayedCount] = useState(6); // Show 6 firms initially
+
+  const displayedFirms = firms.slice(0, displayedCount);
+  const hasMoreFirms = displayedCount < firms.length;
+
+  // Reset displayed count when firms change (due to filters)
+  useEffect(() => {
+    setDisplayedCount(6);
+  }, [firms.length]);
+
+  const handleLoadMore = () => {
+    setLoadingMore(true);
+    setTimeout(() => {
+      setDisplayedCount(prev => Math.min(prev + 3, firms.length)); // Load 3 more at a time
+      setLoadingMore(false);
+    }, 500);
+  };
 
   const handleCopyCoupon = (code: string) => {
     copyToClipboard(code);
@@ -113,7 +130,7 @@ export default function FirmListing({ firms, isLoading }: FirmListingProps) {
               </div>
             </div>
             <div className="divide-y divide-border">
-              {firms.map((firm) => {
+              {displayedFirms.map((firm) => {
                 const activePromotion = firm.promotions[0];
                 const primaryAccount = firm.accounts[0];
                 const hasDiscount = firm.currentDiscount && firm.currentDiscount > 0;
@@ -269,36 +286,34 @@ export default function FirmListing({ firms, isLoading }: FirmListingProps) {
             </div>
 
             {/* Load More Button */}
-            <div className="px-6 py-8 text-center border-t border-border bg-muted/30">
-              <Button
-                variant="outline"
-                disabled={loadingMore}
-                className="inline-flex items-center"
-                onClick={() => {
-                  setLoadingMore(true);
-                  // TODO: Implement pagination
-                  setTimeout(() => setLoadingMore(false), 1000);
-                }}
-                data-testid="load-more-button"
-              >
-                {loadingMore ? (
-                  <i className="fas fa-spinner fa-spin mr-2"></i>
-                ) : (
-                  <i className="fas fa-plus mr-2"></i>
-                )}
-                {t('actions.loadMore')}
-              </Button>
-              <p className="text-sm text-muted-foreground mt-2">
-                {t('listing.showingCount', { count: firms.length })}
-              </p>
-            </div>
+            {hasMoreFirms && (
+              <div className="px-6 py-8 text-center border-t border-border bg-muted/30">
+                <Button
+                  variant="outline"
+                  disabled={loadingMore}
+                  className="inline-flex items-center"
+                  onClick={handleLoadMore}
+                  data-testid="load-more-button"
+                >
+                  {loadingMore ? (
+                    <i className="fas fa-spinner fa-spin mr-2"></i>
+                  ) : (
+                    <i className="fas fa-plus mr-2"></i>
+                  )}
+                  {t('actions.loadMore')}
+                </Button>
+                <p className="text-sm text-muted-foreground mt-2">
+                  {t('listing.showingCount', { count: `${displayedCount}/${firms.length}` })}
+                </p>
+              </div>
+            )}
           </CardContent>
         </Card>
       </div>
 
       {/* Mobile/Tablet Card Layout */}
       <div className="lg:hidden space-y-4">
-        {firms.map((firm) => {
+        {displayedFirms.map((firm) => {
           const activePromotion = firm.promotions[0];
           const primaryAccount = firm.accounts[0];
           const hasDiscount = firm.currentDiscount && firm.currentDiscount > 0;
@@ -435,28 +450,27 @@ export default function FirmListing({ firms, isLoading }: FirmListingProps) {
         })}
 
         {/* Load More Button Mobile */}
-        <div className="text-center pt-4">
-          <Button
-            variant="outline"
-            disabled={loadingMore}
-            className="inline-flex items-center"
-            onClick={() => {
-              setLoadingMore(true);
-              setTimeout(() => setLoadingMore(false), 1000);
-            }}
-            data-testid="load-more-mobile-button"
-          >
-            {loadingMore ? (
-              <i className="fas fa-spinner fa-spin mr-2"></i>
-            ) : (
-              <i className="fas fa-plus mr-2"></i>
-            )}
-            {t('actions.loadMore')}
-          </Button>
-          <p className="text-sm text-muted-foreground mt-2">
-            {t('listing.showingCount', { count: firms.length })}
-          </p>
-        </div>
+        {hasMoreFirms && (
+          <div className="text-center pt-4">
+            <Button
+              variant="outline"
+              disabled={loadingMore}
+              className="inline-flex items-center"
+              onClick={handleLoadMore}
+              data-testid="load-more-mobile-button"
+            >
+              {loadingMore ? (
+                <i className="fas fa-spinner fa-spin mr-2"></i>
+              ) : (
+                <i className="fas fa-plus mr-2"></i>
+              )}
+              {t('actions.loadMore')}
+            </Button>
+            <p className="text-sm text-muted-foreground mt-2">
+              {t('listing.showingCount', { count: `${displayedCount} of ${firms.length}` })}
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );

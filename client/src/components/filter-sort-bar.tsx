@@ -214,13 +214,13 @@ export default function FilterSortBar({ filters, onFiltersChange }: FilterSortBa
               <Badge
                 key={filter.key}
                 variant="secondary"
-                className="bg-primary-100 text-primary-700 flex items-center gap-1"
+                className="bg-primary/10 text-primary border-primary/20 flex items-center gap-1"
                 data-testid={`active-filter-${filter.key}`}
               >
                 {filter.label}
                 <button
                   onClick={() => removeFilter(filter.key)}
-                  className="hover:text-primary-900"
+                  className="hover:text-primary/80 ml-1"
                   data-testid={`remove-filter-${filter.key}`}
                 >
                   <i className="fas fa-times text-xs"></i>
@@ -231,7 +231,7 @@ export default function FilterSortBar({ filters, onFiltersChange }: FilterSortBa
 
           {/* Sort & View Options */}
           <div className="flex items-center gap-3">
-            <span className="text-sm font-medium text-gray-700">{t('sort.sortBy')}:</span>
+            <span className="text-sm font-medium text-foreground">{t('sort.sortBy')}:</span>
             <Select
               value={filters.sort}
               onValueChange={(value) => handleFilterChange('sort', value)}
