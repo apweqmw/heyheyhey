@@ -149,15 +149,15 @@ export default function FirmListing({ firms, isLoading }: FirmListingProps) {
                                 {firm.name}
                               </Link>
                             </div>
-                            <div className="flex items-center gap-1 mb-2">
+                            <div className="flex flex-col gap-1 mb-2">
                               {firm.featured && (
-                                <Badge variant="secondary" className="bg-accent text-accent-foreground text-xs px-1.5 py-0.5">
+                                <Badge variant="secondary" className="bg-accent text-accent-foreground text-xs px-1.5 py-0.5 w-fit">
                                   <i className="fas fa-star mr-1"></i>
                                   {t('labels.featured')}
                                 </Badge>
                               )}
                               {activePromotion && (
-                                <Badge variant="destructive" className="text-xs px-1.5 py-0.5">
+                                <Badge variant="destructive" className="text-xs px-1.5 py-0.5 w-fit">
                                   <i className="fas fa-clock mr-1"></i>
                                   <CountdownTimer endTime={activePromotion.endsAt} />
                                 </Badge>
@@ -314,8 +314,8 @@ export default function FirmListing({ firms, isLoading }: FirmListingProps) {
             >
               <CardContent className="p-4">
                 {/* Header with logo and name */}
-                <div className="flex items-start justify-between mb-4 gap-3">
-                  <div className="flex items-center space-x-3">
+                <div className="mb-4">
+                  <div className="flex items-center space-x-3 mb-3">
                     <div className="w-12 h-12 bg-gradient-to-br from-primary to-primary/80 rounded-lg flex items-center justify-center text-primary-foreground font-bold flex-shrink-0">
                       {firm.logoUrl ? (
                         <img src={firm.logoUrl} alt={firm.name} className="w-full h-full object-cover rounded-lg" />
@@ -323,10 +323,10 @@ export default function FirmListing({ firms, isLoading }: FirmListingProps) {
                         firm.name.substring(0, 2).toUpperCase()
                       )}
                     </div>
-                    <div>
+                    <div className="flex-1 min-w-0">
                       <Link 
                         href={`/${locale}/firms/${firm.slug}`}
-                        className="font-semibold text-lg text-foreground hover:text-primary transition-colors"
+                        className="font-semibold text-lg text-foreground hover:text-primary transition-colors block"
                         data-testid={`firm-name-mobile-${firm.slug}`}
                       >
                         {firm.name}
@@ -338,16 +338,16 @@ export default function FirmListing({ firms, isLoading }: FirmListingProps) {
                     </div>
                   </div>
                   
-                  {/* Badges */}
-                  <div className="flex flex-col gap-1 items-end">
+                  {/* Badges - Separate row */}
+                  <div className="flex flex-wrap gap-2">
                     {firm.featured && (
-                      <Badge variant="secondary" className="bg-accent text-accent-foreground text-xs whitespace-nowrap">
+                      <Badge variant="secondary" className="bg-accent text-accent-foreground text-xs px-2 py-1">
                         <i className="fas fa-star mr-1"></i>
                         {t('labels.featured')}
                       </Badge>
                     )}
                     {activePromotion && (
-                      <Badge variant="destructive" className="text-xs whitespace-nowrap">
+                      <Badge variant="destructive" className="text-xs px-2 py-1">
                         <i className="fas fa-clock mr-1"></i>
                         <CountdownTimer endTime={activePromotion.endsAt} />
                       </Badge>
