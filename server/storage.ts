@@ -73,160 +73,125 @@ export class DatabaseStorage implements IStorage {
       offset = 0,
     } = options;
 
-    let query = db
-      .select({
-        firm: firms,
-        account: accounts,
-        promotion: promotions,
-      })
+    // Simple approach: get all firms first, then get related data
+    const firmsResult = await db
+      .select()
       .from(firms)
-      .leftJoin(accounts, eq(firms.id, accounts.firmId))
-      .leftJoin(promotions, and(
-        eq(firms.id, promotions.firmId),
+      .where(eq(firms.active, true))
+      .limit(limit)
+      .offset(offset);
+
+    const firmIds = firmsResult.map(f => f.id);
+    
+    // Get all accounts for these firms
+    const accountsResult = await db
+      .select()
+      .from(accounts)
+      .where(sql`${accounts.firmId} = ANY(${firmIds})`);
+
+    // Get all active promotions for these firms
+    const promotionsResult = await db
+      .select()
+      .from(promotions)
+      .where(and(
+        sql`${promotions.firmId} = ANY(${firmIds})`,
         eq(promotions.active, true),
         or(
           isNull(promotions.startsAt),
           lte(promotions.startsAt, new Date())
         ),
         gte(promotions.endsAt, new Date())
-      ))
-      .where(eq(firms.active, true));
+      ));
 
-    if (accountSize) {
-      query = query.where(eq(accounts.sizeUsd, accountSize));
-    }
-
-    if (maxPayoutDays) {
-      query = query.where(lte(firms.earliestPayoutDays, maxPayoutDays));
-    }
-
-    if (platform) {
-      query = query.where(sql`${firms.platforms} ? ${platform}`);
-    }
-
-    // Apply sorting
-    switch (sort) {
-      case 'price_asc':
-        query = query.orderBy(asc(accounts.basePrice));
-        break;
-      case 'price_desc':
-        query = query.orderBy(desc(accounts.basePrice));
-        break;
-      case 'payout_asc':
-        query = query.orderBy(asc(firms.earliestPayoutDays));
-        break;
-      case 'rating_desc':
-        query = query.orderBy(desc(firms.rating));
-        break;
-      case 'discount_desc':
-      default:
-        query = query.orderBy(desc(promotions.discountPct));
-        break;
-    }
-
-    query = query.limit(limit).offset(offset);
-
-    const results = await query;
-
-    // Group results by firm
+    // Group by firm
     const firmMap = new Map<string, FirmWithDetails>();
 
-    for (const row of results) {
-      const firmId = row.firm.id;
+    for (const firm of firmsResult) {
+      const firmAccounts = accountsResult.filter(a => a.firmId === firm.id);
+      const firmPromotions = promotionsResult.filter(p => p.firmId === firm.id);
       
-      if (!firmMap.has(firmId)) {
-        firmMap.set(firmId, {
-          ...row.firm,
-          accounts: [],
-          promotions: [],
-        });
-      }
-
-      const firmData = firmMap.get(firmId)!;
-
-      if (row.account && !firmData.accounts.find(a => a.id === row.account!.id)) {
-        firmData.accounts.push(row.account);
-      }
-
-      if (row.promotion && !firmData.promotions.find(p => p.id === row.promotion!.id)) {
-        firmData.promotions.push(row.promotion);
-      }
-    }
-
-    // Calculate derived fields
-    return Array.from(firmMap.values()).map(firm => {
-      const activePromotion = firm.promotions[0]; // Best discount
+      const activePromotion = firmPromotions[0];
       const currentDiscount = activePromotion ? Number(activePromotion.discountPct) : 0;
       
-      // Calculate final price for primary account size
-      const primaryAccount = firm.accounts.find(a => accountSize ? a.sizeUsd === accountSize : true) || firm.accounts[0];
+      const primaryAccount = firmAccounts.find(a => accountSize ? a.sizeUsd === accountSize : true) || firmAccounts[0];
       const basePrice = primaryAccount ? Number(primaryAccount.basePrice) : 0;
       const finalPrice = basePrice * (1 - currentDiscount / 100);
 
-      return {
+      firmMap.set(firm.id, {
         ...firm,
-        currentDiscount,
-        finalPrice,
-        countdownEndTime: activePromotion?.endsAt?.toISOString(),
-        accounts: firm.accounts.map(account => ({
+        accounts: firmAccounts.map(account => ({
           ...account,
           currentPrice: Number(account.basePrice) * (1 - currentDiscount / 100),
         })),
-      };
-    });
+        promotions: firmPromotions,
+        currentDiscount,
+        finalPrice,
+        countdownEndTime: activePromotion?.endsAt?.toISOString(),
+      });
+    }
+
+    return Array.from(firmMap.values());
   }
 
   async getFirmBySlug(slug: string, locale: string = 'en'): Promise<FirmWithDetails | undefined> {
-    const result = await db
-      .select({
-        firm: firms,
-        account: accounts,
-        promotion: promotions,
-      })
-      .from(firms)
-      .leftJoin(accounts, eq(firms.id, accounts.firmId))
-      .leftJoin(promotions, and(
-        eq(firms.id, promotions.firmId),
-        eq(promotions.active, true),
-        or(
-          isNull(promotions.startsAt),
-          lte(promotions.startsAt, new Date())
-        ),
-        gte(promotions.endsAt, new Date())
-      ))
-      .where(and(eq(firms.slug, slug), eq(firms.active, true)));
+    try {
+      console.log(`getFirmBySlug called with slug: ${slug}, locale: ${locale}`);
+      
+      // First get the firm
+      const firmResult = await db
+        .select()
+        .from(firms)
+        .where(and(eq(firms.slug, slug), eq(firms.active, true)))
+        .limit(1);
 
-    if (!result.length) return undefined;
-
-    const firm = result[0].firm;
-    const accountsMap = new Map<string, Account>();
-    const promotionsMap = new Map<string, Promotion>();
-
-    for (const row of result) {
-      if (row.account) {
-        accountsMap.set(row.account.id, row.account);
+      if (!firmResult.length) {
+        console.log(`No firm found with slug: ${slug}`);
+        return undefined;
       }
-      if (row.promotion) {
-        promotionsMap.set(row.promotion.id, row.promotion);
-      }
+
+      const firm = firmResult[0];
+      console.log(`Found firm: ${firm.name} (${firm.id})`);
+
+      // Get accounts for this firm
+      const accountsResult = await db
+        .select()
+        .from(accounts)
+        .where(eq(accounts.firmId, firm.id));
+
+      // Get active promotions for this firm
+      const promotionsResult = await db
+        .select()
+        .from(promotions)
+        .where(and(
+          eq(promotions.firmId, firm.id),
+          eq(promotions.active, true),
+          or(
+            isNull(promotions.startsAt),
+            lte(promotions.startsAt, new Date())
+          ),
+          gte(promotions.endsAt, new Date())
+        ));
+
+      const activePromotion = promotionsResult[0];
+      const currentDiscount = activePromotion ? Number(activePromotion.discountPct) : 0;
+
+      console.log(`Firm has ${accountsResult.length} accounts and ${promotionsResult.length} promotions`);
+
+      return {
+        ...firm,
+        accounts: accountsResult.map(account => ({
+          ...account,
+          currentPrice: Number(account.basePrice) * (1 - currentDiscount / 100),
+        })),
+        promotions: promotionsResult,
+        currentDiscount,
+        finalPrice: accountsResult.length > 0 ? Number(accountsResult[0].basePrice) * (1 - currentDiscount / 100) : 0,
+        countdownEndTime: activePromotion?.endsAt?.toISOString(),
+      };
+    } catch (error) {
+      console.error('Error in getFirmBySlug:', error);
+      throw error;
     }
-
-    const accounts = Array.from(accountsMap.values());
-    const promotions = Array.from(promotionsMap.values());
-    const activePromotion = promotions[0];
-    const currentDiscount = activePromotion ? Number(activePromotion.discountPct) : 0;
-
-    return {
-      ...firm,
-      accounts: accounts.map(account => ({
-        ...account,
-        currentPrice: Number(account.basePrice) * (1 - currentDiscount / 100),
-      })),
-      promotions,
-      currentDiscount,
-      finalPrice: accounts.length > 0 ? Number(accounts[0].basePrice) * (1 - currentDiscount / 100) : 0,
-      countdownEndTime: activePromotion?.endsAt?.toISOString(),
-    };
   }
 
   async getFirmById(id: string): Promise<Firm | undefined> {
