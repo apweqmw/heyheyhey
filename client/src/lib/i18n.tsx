@@ -43,6 +43,8 @@ const translations = {
     'firmDetail.stats.totalSavings': 'Total Savings Available',
     'firmDetail.stats.avgDiscount': 'Average Discount',
     'firmDetail.stats.accountSizes': 'Account Sizes Available',
+    'firmDetail.fundingAccount.title': 'Funding Account Information',
+    'firmDetail.liveAccount.title': 'Live Account vs Evaluation',
     
     // Table headers
     'table.firm': 'Firm',
@@ -172,6 +174,8 @@ const translations = {
     'firmDetail.stats.totalSavings': '총 절약 가능 금액',
     'firmDetail.stats.avgDiscount': '평균 할인',
     'firmDetail.stats.accountSizes': '사용 가능한 계좌 크기',
+    'firmDetail.fundingAccount.title': '펀드 계좌 정보',
+    'firmDetail.liveAccount.title': '실제 계좌 vs 평가',
     
     // Table headers
     'table.firm': '회사',
@@ -301,6 +305,8 @@ const translations = {
     'firmDetail.stats.totalSavings': '利用可能な総節約額',
     'firmDetail.stats.avgDiscount': '平均割引',
     'firmDetail.stats.accountSizes': '利用可能なアカウントサイズ',
+    'firmDetail.fundingAccount.title': '資金提供口座情報',
+    'firmDetail.liveAccount.title': 'ライブ口座 vs 評価',
     
     // Table headers
     'table.firm': '会社',
@@ -430,6 +436,8 @@ const translations = {
     'firmDetail.stats.totalSavings': 'कुल उपलब्ध बचत',
     'firmDetail.stats.avgDiscount': 'औसत छूट',
     'firmDetail.stats.accountSizes': 'उपलब्ध खाता आकार',
+    'firmDetail.fundingAccount.title': 'फंडिंग खाता जानकारी',
+    'firmDetail.liveAccount.title': 'लाइव खाता बनाम मूल्यांकन',
     
     // Table headers
     'table.firm': 'फर्म',

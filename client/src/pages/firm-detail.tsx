@@ -289,6 +289,197 @@ export default function FirmDetail() {
                 </div>
               </CardContent>
             </Card>
+
+            {/* Funding Account Information */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center">
+                  <i className="fas fa-university mr-2 text-primary-500"></i>
+                  {t('firmDetail.fundingAccount.title')}
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  <div className="bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-lg p-4">
+                    <h4 className="font-semibold text-green-800 mb-2">
+                      <i className="fas fa-check-circle mr-2"></i>
+                      What is a Funded Account?
+                    </h4>
+                    <p className="text-green-700 text-sm leading-relaxed">
+                      After passing the evaluation challenges, you receive a funded account with {firm.name}'s capital. 
+                      You can trade with larger amounts without risking your own money, keeping {firm.payoutSplit?.split('/')[0] || '80'}% of profits made.
+                    </p>
+                  </div>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="border border-border rounded-lg p-4">
+                      <div className="flex items-center mb-3">
+                        <i className="fas fa-chart-line text-blue-500 mr-2"></i>
+                        <h5 className="font-semibold text-foreground">Scaling Process</h5>
+                      </div>
+                      <p className="text-sm text-muted-foreground mb-3">
+                        Successful traders can scale their accounts up to larger sizes based on consistent performance.
+                      </p>
+                      <div className="text-sm">
+                        <div className="flex justify-between py-1">
+                          <span className="text-muted-foreground">Max Scale:</span>
+                          <span className="font-medium">Up to $2M+</span>
+                        </div>
+                        <div className="flex justify-between py-1">
+                          <span className="text-muted-foreground">Requirements:</span>
+                          <span className="font-medium">Consistent profits</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="border border-border rounded-lg p-4">
+                      <div className="flex items-center mb-3">
+                        <i className="fas fa-hand-holding-usd text-green-500 mr-2"></i>
+                        <h5 className="font-semibold text-foreground">Profit Split</h5>
+                      </div>
+                      <p className="text-sm text-muted-foreground mb-3">
+                        Keep a significant portion of your trading profits with transparent payout terms.
+                      </p>
+                      <div className="text-sm">
+                        <div className="flex justify-between py-1">
+                          <span className="text-muted-foreground">Your Share:</span>
+                          <span className="font-bold text-green-600">{firm.payoutSplit?.split('/')[0] || '80'}%</span>
+                        </div>
+                        <div className="flex justify-between py-1">
+                          <span className="text-muted-foreground">First Payout:</span>
+                          <span className="font-medium">{firm.earliestPayoutDays}+ days</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                    <h5 className="font-semibold text-blue-800 mb-2">
+                      <i className="fas fa-lightbulb mr-2"></i>
+                      How to Get Funded
+                    </h5>
+                    <ol className="text-sm text-blue-700 space-y-1 ml-4">
+                      <li>1. Purchase an evaluation challenge account</li>
+                      <li>2. Pass the {firm.evaluationSteps}-step evaluation process</li>
+                      <li>3. Demonstrate consistent, profitable trading</li>
+                      <li>4. Receive your funded account with {firm.name}'s capital</li>
+                      <li>5. Start earning real profits with their money</li>
+                    </ol>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Live Account vs Evaluation */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center">
+                  <i className="fas fa-exchange-alt mr-2 text-primary-500"></i>
+                  {t('firmDetail.liveAccount.title')}
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-6">
+                  <div className="text-sm text-muted-foreground mb-4">
+                    Understanding the difference between evaluation and live funded accounts:
+                  </div>
+
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    {/* Evaluation Phase */}
+                    <div className="border border-orange-200 bg-orange-50 rounded-lg p-4">
+                      <div className="flex items-center mb-3">
+                        <i className="fas fa-clipboard-check text-orange-600 mr-2"></i>
+                        <h5 className="font-semibold text-orange-800">Evaluation Phase</h5>
+                      </div>
+                      
+                      <div className="space-y-3 text-sm">
+                        <div className="flex items-start">
+                          <i className="fas fa-target text-orange-600 mr-2 mt-0.5 text-xs"></i>
+                          <div>
+                            <div className="font-medium text-orange-800">Profit Target:</div>
+                            <div className="text-orange-700">{firm.profitTarget || '10%'} in {firm.minTradingDays || 10}+ trading days</div>
+                          </div>
+                        </div>
+                        
+                        <div className="flex items-start">
+                          <i className="fas fa-shield-alt text-orange-600 mr-2 mt-0.5 text-xs"></i>
+                          <div>
+                            <div className="font-medium text-orange-800">Risk Limits:</div>
+                            <div className="text-orange-700">
+                              Daily: {firm.maxDailyLoss || '5%'} | Total: {firm.maxTotalLoss || '10%'}
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="flex items-start">
+                          <i className="fas fa-dollar-sign text-orange-600 mr-2 mt-0.5 text-xs"></i>
+                          <div>
+                            <div className="font-medium text-orange-800">Cost:</div>
+                            <div className="text-orange-700">One-time evaluation fee + potential activation fee</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Live Funded Account */}
+                    <div className="border border-green-200 bg-green-50 rounded-lg p-4">
+                      <div className="flex items-center mb-3">
+                        <i className="fas fa-trophy text-green-600 mr-2"></i>
+                        <h5 className="font-semibold text-green-800">Live Funded Account</h5>
+                      </div>
+                      
+                      <div className="space-y-3 text-sm">
+                        <div className="flex items-start">
+                          <i className="fas fa-money-bill-wave text-green-600 mr-2 mt-0.5 text-xs"></i>
+                          <div>
+                            <div className="font-medium text-green-800">Real Capital:</div>
+                            <div className="text-green-700">Trade with {firm.name}'s money, not yours</div>
+                          </div>
+                        </div>
+                        
+                        <div className="flex items-start">
+                          <i className="fas fa-percentage text-green-600 mr-2 mt-0.5 text-xs"></i>
+                          <div>
+                            <div className="font-medium text-green-800">Profit Share:</div>
+                            <div className="text-green-700">Keep {firm.payoutSplit?.split('/')[0] || '80'}% of all profits made</div>
+                          </div>
+                        </div>
+
+                        <div className="flex items-start">
+                          <i className="fas fa-calendar-alt text-green-600 mr-2 mt-0.5 text-xs"></i>
+                          <div>
+                            <div className="font-medium text-green-800">Payouts:</div>
+                            <div className="text-green-700">Regular payouts starting after {firm.earliestPayoutDays} days</div>
+                          </div>
+                        </div>
+
+                        {firm.activationFee && Number(firm.activationFee) > 0 && (
+                          <div className="flex items-start">
+                            <i className="fas fa-key text-green-600 mr-2 mt-0.5 text-xs"></i>
+                            <div>
+                              <div className="font-medium text-green-800">Activation:</div>
+                              <div className="text-green-700">${Number(firm.activationFee).toLocaleString()} one-time fee</div>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+
+                  {firm.consistencyRule && (
+                    <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                      <div className="flex items-start">
+                        <i className="fas fa-balance-scale text-yellow-600 mr-2 mt-0.5"></i>
+                        <div>
+                          <div className="font-semibold text-yellow-800 mb-1">Consistency Rule:</div>
+                          <p className="text-sm text-yellow-700">{firm.consistencyRule}</p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
           </div>
 
           {/* Sidebar */}
