@@ -127,11 +127,11 @@ export default function FirmListing({ firms, isLoading }: FirmListingProps) {
                     }`}
                     data-testid={`firm-row-${firm.slug}`}
                   >
-                    <div className="grid grid-cols-12 gap-4 items-center">
+                    <div className="grid grid-cols-12 gap-4 items-start">
                       {/* Firm Info */}
                       <div className="col-span-3">
-                        <div className="flex items-center space-x-3">
-                          <div className="w-12 h-12 bg-gradient-to-br from-primary to-primary/80 rounded-lg flex items-center justify-center text-primary-foreground font-bold flex-shrink-0">
+                        <div className="flex items-start space-x-3">
+                          <div className="w-12 h-12 bg-gradient-to-br from-primary to-primary/80 rounded-lg flex items-center justify-center text-primary-foreground font-bold flex-shrink-0 mt-1">
                             {firm.logoUrl ? (
                               <img src={firm.logoUrl} alt={firm.name} className="w-full h-full object-cover rounded-lg" />
                             ) : (
@@ -149,15 +149,15 @@ export default function FirmListing({ firms, isLoading }: FirmListingProps) {
                                 {firm.name}
                               </Link>
                             </div>
-                            <div className="flex items-center gap-2 mb-1 flex-wrap">
+                            <div className="flex items-center gap-1 mb-2">
                               {firm.featured && (
-                                <Badge variant="secondary" className="bg-accent text-accent-foreground text-xs">
+                                <Badge variant="secondary" className="bg-accent text-accent-foreground text-xs px-1.5 py-0.5">
                                   <i className="fas fa-star mr-1"></i>
                                   {t('labels.featured')}
                                 </Badge>
                               )}
                               {activePromotion && (
-                                <Badge variant="destructive" className="text-xs">
+                                <Badge variant="destructive" className="text-xs px-1.5 py-0.5">
                                   <i className="fas fa-clock mr-1"></i>
                                   <CountdownTimer endTime={activePromotion.endsAt} />
                                 </Badge>
@@ -254,7 +254,7 @@ export default function FirmListing({ firms, isLoading }: FirmListingProps) {
                                 ? 'bg-accent hover:bg-accent/90' 
                                 : 'bg-primary hover:bg-primary/90'
                             } text-primary-foreground`}
-                            onClick={() => primaryAccount && handleGetChallenge(firm, primaryAccount)}
+                            onClick={() => handleGetChallenge(firm, primaryAccount || firm.accounts[0])}
                             data-testid={`get-challenge-${firm.slug}`}
                           >
                             {t('actions.getChallenge')}
@@ -423,7 +423,7 @@ export default function FirmListing({ firms, isLoading }: FirmListingProps) {
                       ? 'bg-accent hover:bg-accent/90' 
                       : 'bg-primary hover:bg-primary/90'
                   } text-primary-foreground`}
-                  onClick={() => primaryAccount && handleGetChallenge(firm, primaryAccount)}
+                  onClick={() => handleGetChallenge(firm, primaryAccount || firm.accounts[0])}
                   data-testid={`get-challenge-mobile-${firm.slug}`}
                 >
                   {t('actions.getChallenge')}
