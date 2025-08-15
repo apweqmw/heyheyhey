@@ -19,7 +19,15 @@ export default function FirmDetail() {
   const { copyToClipboard } = useClipboard();
 
   const { data: firm, isLoading, error } = useQuery<FirmWithDetails>({
-    queryKey: ['/api/firms', params?.slug, locale],
+    queryKey: ['firm', params?.slug, locale],
+    queryFn: async () => {
+      if (!params?.slug) throw new Error('No slug provided');
+      const response = await fetch(`/api/firms/${params.slug}?locale=${locale}`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch firm details');
+      }
+      return response.json();
+    },
     enabled: !!params?.slug,
   });
 

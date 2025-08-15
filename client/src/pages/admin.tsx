@@ -19,18 +19,34 @@ export default function Admin() {
 
   // Fetch firms
   const { data: firms = [], isLoading: firmsLoading } = useQuery<Firm[]>({
-    queryKey: ['/api/admin/firms'],
+    queryKey: ['admin-firms'],
+    queryFn: async () => {
+      const response = await fetch('/api/admin/firms');
+      if (!response.ok) throw new Error('Failed to fetch firms');
+      return response.json();
+    },
   });
 
   // Fetch accounts for selected firm
   const { data: accounts = [] } = useQuery<Account[]>({
-    queryKey: ['/api/admin/accounts', selectedFirm],
+    queryKey: ['admin-accounts', selectedFirm],
+    queryFn: async () => {
+      if (!selectedFirm) return [];
+      const response = await fetch(`/api/admin/accounts?firmId=${selectedFirm}`);
+      if (!response.ok) throw new Error('Failed to fetch accounts');
+      return response.json();
+    },
     enabled: !!selectedFirm,
   });
 
   // Fetch promotions
   const { data: promotions = [] } = useQuery<Promotion[]>({
-    queryKey: ['/api/admin/promotions'],
+    queryKey: ['admin-promotions'],
+    queryFn: async () => {
+      const response = await fetch('/api/admin/promotions');
+      if (!response.ok) throw new Error('Failed to fetch promotions');
+      return response.json();
+    },
   });
 
   // Firm form state

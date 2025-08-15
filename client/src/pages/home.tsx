@@ -24,7 +24,21 @@ export default function Home() {
 
   // Fetch firms data
   const { data: firms = [], isLoading, error } = useQuery<FirmWithDetails[]>({
-    queryKey: ['/api/firms', locale, filters.sort, filters.accountSize, filters.platform, filters.maxPayoutDays],
+    queryKey: ['firms', locale, filters.sort, filters.accountSize, filters.platform, filters.maxPayoutDays],
+    queryFn: async () => {
+      const params = new URLSearchParams();
+      params.set('locale', locale);
+      params.set('sort', filters.sort);
+      if (filters.accountSize) params.set('size', filters.accountSize.toString());
+      if (filters.platform) params.set('platform', filters.platform);
+      if (filters.maxPayoutDays) params.set('maxPayoutDays', filters.maxPayoutDays.toString());
+      
+      const response = await fetch(`/api/firms?${params.toString()}`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch firms');
+      }
+      return response.json();
+    },
     staleTime: 5 * 60 * 1000, // 5 minutes
   });
 
