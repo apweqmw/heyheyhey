@@ -247,27 +247,7 @@ export default function FilterSortBar({ filters, onFiltersChange }: FilterSortBa
                 ))}
               </SelectContent>
             </Select>
-            
-            <div className="flex border border-gray-300 rounded-lg overflow-hidden">
-              <Button
-                variant={viewMode === 'table' ? 'default' : 'ghost'}
-                size="sm"
-                className="px-3 py-2 rounded-none"
-                onClick={() => setViewMode('table')}
-                data-testid="table-view-button"
-              >
-                <i className="fas fa-list"></i>
-              </Button>
-              <Button
-                variant={viewMode === 'grid' ? 'default' : 'ghost'}
-                size="sm"
-                className="px-3 py-2 rounded-none"
-                onClick={() => setViewMode('grid')}
-                data-testid="grid-view-button"
-              >
-                <i className="fas fa-th-large"></i>
-              </Button>
-            </div>
+
           </div>
         </div>
       </div>
