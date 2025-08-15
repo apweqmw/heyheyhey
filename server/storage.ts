@@ -81,27 +81,39 @@ export class DatabaseStorage implements IStorage {
       .limit(limit)
       .offset(offset);
 
+    if (firmsResult.length === 0) {
+      return [];
+    }
+
     const firmIds = firmsResult.map(f => f.id);
     
-    // Get all accounts for these firms
-    const accountsResult = await db
-      .select()
-      .from(accounts)
-      .where(sql`${accounts.firmId} = ANY(${firmIds})`);
+    // Get all accounts for these firms using individual queries for each firm
+    const accountsResult: Account[] = [];
+    const promotionsResult: Promotion[] = [];
+    
+    for (const firmId of firmIds) {
+      // Get accounts for this firm
+      const firmAccounts = await db
+        .select()
+        .from(accounts)
+        .where(eq(accounts.firmId, firmId));
+      accountsResult.push(...firmAccounts);
 
-    // Get all active promotions for these firms
-    const promotionsResult = await db
-      .select()
-      .from(promotions)
-      .where(and(
-        sql`${promotions.firmId} = ANY(${firmIds})`,
-        eq(promotions.active, true),
-        or(
-          isNull(promotions.startsAt),
-          lte(promotions.startsAt, new Date())
-        ),
-        gte(promotions.endsAt, new Date())
-      ));
+      // Get active promotions for this firm
+      const firmPromotions = await db
+        .select()
+        .from(promotions)
+        .where(and(
+          eq(promotions.firmId, firmId),
+          eq(promotions.active, true),
+          or(
+            isNull(promotions.startsAt),
+            lte(promotions.startsAt, new Date())
+          ),
+          gte(promotions.endsAt, new Date())
+        ));
+      promotionsResult.push(...firmPromotions);
+    }
 
     // Group by firm
     const firmMap = new Map<string, FirmWithDetails>();
