@@ -110,7 +110,7 @@ export default function FilterSortBar({ filters, onFiltersChange }: FilterSortBa
                 <Button
                   variant="outline"
                   size="sm"
-                  className="flex items-center space-x-2"
+                  className="flex items-center space-x-2 focus:ring-0 focus:ring-offset-0"
                   data-testid="account-size-filter"
                 >
                   <span>{t('filters.accountSize')}</span>
@@ -145,7 +145,7 @@ export default function FilterSortBar({ filters, onFiltersChange }: FilterSortBa
                 <Button
                   variant="outline"
                   size="sm"
-                  className="flex items-center space-x-2"
+                  className="flex items-center space-x-2 focus:ring-0 focus:ring-offset-0"
                   data-testid="platform-filter"
                 >
                   <span>{t('filters.platform')}</span>
@@ -180,7 +180,7 @@ export default function FilterSortBar({ filters, onFiltersChange }: FilterSortBa
                 <Button
                   variant="outline"
                   size="sm"
-                  className="flex items-center space-x-2"
+                  className="flex items-center space-x-2 focus:ring-0 focus:ring-offset-0"
                   data-testid="payout-filter"
                 >
                   <span>{t('filters.payout')}</span>
@@ -236,7 +236,7 @@ export default function FilterSortBar({ filters, onFiltersChange }: FilterSortBa
               value={filters.sort}
               onValueChange={(value) => handleFilterChange('sort', value)}
             >
-              <SelectTrigger className="w-48" data-testid="sort-select">
+              <SelectTrigger className="w-48 focus:ring-0 focus:ring-offset-0" data-testid="sort-select">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
