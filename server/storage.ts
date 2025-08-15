@@ -10,7 +10,7 @@ import {
   type InsertAccount,
   type InsertPromotion,
   type FirmWithDetails,
-} from "@shared/schema";
+} from "@/shared/schema";
 import { db } from "./db";
 import { eq, and, desc, asc, sql, gte, lte, isNull, or } from "drizzle-orm";
 

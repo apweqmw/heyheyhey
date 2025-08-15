@@ -1,5 +1,8 @@
+'use client';
+
 import { useState } from "react";
-import { Link, useLocation } from "wouter";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import LanguageSwitcher from "./language-switcher";
@@ -7,13 +10,13 @@ import { ThemeToggle } from "@/components/theme-toggle";
 import { useI18n } from "@/lib/i18n";
 
 export default function Header() {
-  const [location] = useLocation();
+  const pathname = usePathname();
   const { locale, t } = useI18n();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
 
   const navigation = [
-    { name: t('nav.rankings'), href: `/${locale}`, current: location === `/${locale}` || location === '/' },
+    { name: t('nav.rankings'), href: `/${locale}`, current: pathname === `/${locale}` || pathname === '/' },
     { name: t('nav.reviews'), href: `/${locale}/reviews`, current: false },
     { name: t('nav.guides'), href: `/${locale}/guides`, current: false },
     { name: t('nav.news'), href: `/${locale}/news`, current: false },
