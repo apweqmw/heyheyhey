@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
@@ -20,6 +20,28 @@ interface FilterSortBarProps {
 export default function FilterSortBar({ filters, onFiltersChange }: FilterSortBarProps) {
   const { t } = useI18n();
   const [viewMode, setViewMode] = useState<'table' | 'grid'>('table');
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  // Handle scroll-based show/hide
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      
+      // Show when scrolling up, hide when scrolling down
+      if (currentScrollY < lastScrollY || currentScrollY < 100) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
+      
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [lastScrollY]);
 
   const accountSizes = [10000, 25000, 50000, 100000, 200000];
   const platforms = ['MetaTrader4', 'MetaTrader5', 'cTrader', 'DXTrade', 'TradingView'];
@@ -73,12 +95,14 @@ export default function FilterSortBar({ filters, onFiltersChange }: FilterSortBa
   };
 
   return (
-    <div className="bg-white border-b border-gray-200 sticky top-16 z-30">
+    <div className={`bg-background border-b border-border sticky top-16 z-30 backdrop-blur-sm bg-background/95 transition-transform duration-300 ${
+      isVisible ? 'translate-y-0' : '-translate-y-full'
+    }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
         <div className="flex flex-wrap items-center justify-between gap-4">
           {/* Filters */}
           <div className="flex flex-wrap items-center gap-3">
-            <span className="text-sm font-medium text-gray-700">{t('filters.title')}:</span>
+            <span className="text-sm font-medium text-foreground">{t('filters.title')}:</span>
             
             {/* Account Size Filter */}
             <Popover>

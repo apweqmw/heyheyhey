@@ -140,7 +140,7 @@ export default function FirmListing({ firms, isLoading }: FirmListingProps) {
                           </div>
                           
                           <div>
-                            <div className="flex items-center gap-2 mb-1">
+                            <div className="mb-1">
                               <Link 
                                 href={`/${locale}/firms/${firm.slug}`}
                                 className="font-semibold text-foreground hover:text-primary transition-colors"
@@ -148,6 +148,8 @@ export default function FirmListing({ firms, isLoading }: FirmListingProps) {
                               >
                                 {firm.name}
                               </Link>
+                            </div>
+                            <div className="flex items-center gap-2 mb-1 flex-wrap">
                               {firm.featured && (
                                 <Badge variant="secondary" className="bg-accent text-accent-foreground text-xs">
                                   <i className="fas fa-star mr-1"></i>
@@ -312,7 +314,7 @@ export default function FirmListing({ firms, isLoading }: FirmListingProps) {
             >
               <CardContent className="p-4">
                 {/* Header with logo and name */}
-                <div className="flex items-center justify-between mb-4">
+                <div className="flex items-start justify-between mb-4 gap-3">
                   <div className="flex items-center space-x-3">
                     <div className="w-12 h-12 bg-gradient-to-br from-primary to-primary/80 rounded-lg flex items-center justify-center text-primary-foreground font-bold flex-shrink-0">
                       {firm.logoUrl ? (
@@ -337,15 +339,15 @@ export default function FirmListing({ firms, isLoading }: FirmListingProps) {
                   </div>
                   
                   {/* Badges */}
-                  <div className="flex flex-col gap-1">
+                  <div className="flex flex-col gap-1 items-end">
                     {firm.featured && (
-                      <Badge variant="secondary" className="bg-accent text-accent-foreground text-xs">
+                      <Badge variant="secondary" className="bg-accent text-accent-foreground text-xs whitespace-nowrap">
                         <i className="fas fa-star mr-1"></i>
                         {t('labels.featured')}
                       </Badge>
                     )}
                     {activePromotion && (
-                      <Badge variant="destructive" className="text-xs">
+                      <Badge variant="destructive" className="text-xs whitespace-nowrap">
                         <i className="fas fa-clock mr-1"></i>
                         <CountdownTimer endTime={activePromotion.endsAt} />
                       </Badge>
