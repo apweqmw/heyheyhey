@@ -1,7 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertFirmSchema, insertAccountSchema, insertPromotionSchema } from "@/shared/schema";
+import { insertFirmSchema, insertAccountSchema, insertPromotionSchema } from "@shared/schema";
 import { z } from "zod";
 import crypto from "crypto";
 

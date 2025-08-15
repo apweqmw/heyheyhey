@@ -10,7 +10,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import Header from '@/components/header';
 import CountdownTimer from '@/components/countdown-timer';
 import EvaluationSteps from '@/components/evaluation-steps';
-import { useI18n } from '@/lib/i18n';
+import { useLanguage } from '@/lib/i18n';
 import { useClipboard } from '@/hooks/use-clipboard';
 
 interface FirmDetailProps {
@@ -18,7 +18,7 @@ interface FirmDetailProps {
 }
 
 export default function FirmDetail({ firm }: FirmDetailProps) {
-  const { t } = useI18n();
+  const { t } = useLanguage();
   const { copyToClipboard } = useClipboard();
   
   if (!firm) {

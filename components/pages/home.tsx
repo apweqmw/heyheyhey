@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import Header from '@/components/header';
 import FilterSortBar from '@/components/filter-sort-bar';
 import FirmListing from '@/components/firm-listing';
-import { useI18n } from '@/lib/i18n';
+import { useLanguage } from '@/lib/i18n';
 
 interface Filters {
   accountSize?: number;
@@ -15,7 +15,7 @@ interface Filters {
 }
 
 export default function Home() {
-  const { t } = useI18n();
+  const { t } = useLanguage();
   const [filters, setFilters] = useState<Filters>({
     sort: 'name'
   });

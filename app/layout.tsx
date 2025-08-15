@@ -4,7 +4,6 @@ import React from 'react';
 import './globals.css';
 import { ThemeProvider } from '@/components/theme-provider';
 import { QueryProvider } from '@/components/query-provider';
-import { I18nProvider } from '@/lib/i18n';
 import { Toaster } from '@/components/ui/toaster';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -80,10 +79,8 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <I18nProvider>
-              {children}
-              <Toaster />
-            </I18nProvider>
+            {children}
+            <Toaster />
           </ThemeProvider>
         </QueryProvider>
       </body>
