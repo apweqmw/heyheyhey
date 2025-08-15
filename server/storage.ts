@@ -212,17 +212,14 @@ export class DatabaseStorage implements IStorage {
   }
 
   async createFirm(firmData: InsertFirm): Promise<Firm> {
-    const [firm] = await db.insert(firms).values({
-      ...firmData,
-      updatedAt: new Date(),
-    }).returning();
+    const [firm] = await db.insert(firms).values(firmData as any).returning();
     return firm;
   }
 
   async updateFirm(id: string, firmData: Partial<InsertFirm>): Promise<Firm> {
     const [firm] = await db
       .update(firms)
-      .set({ ...firmData, updatedAt: new Date() })
+      .set(firmData as any)
       .where(eq(firms.id, id))
       .returning();
     return firm;
@@ -237,17 +234,14 @@ export class DatabaseStorage implements IStorage {
   }
 
   async createAccount(accountData: InsertAccount): Promise<Account> {
-    const [account] = await db.insert(accounts).values({
-      ...accountData,
-      updatedAt: new Date(),
-    }).returning();
+    const [account] = await db.insert(accounts).values(accountData).returning();
     return account;
   }
 
   async updateAccount(id: string, accountData: Partial<InsertAccount>): Promise<Account> {
     const [account] = await db
       .update(accounts)
-      .set({ ...accountData, updatedAt: new Date() })
+      .set(accountData)
       .where(eq(accounts.id, id))
       .returning();
     return account;
@@ -278,17 +272,14 @@ export class DatabaseStorage implements IStorage {
   }
 
   async createPromotion(promotionData: InsertPromotion): Promise<Promotion> {
-    const [promotion] = await db.insert(promotions).values({
-      ...promotionData,
-      updatedAt: new Date(),
-    }).returning();
+    const [promotion] = await db.insert(promotions).values(promotionData).returning();
     return promotion;
   }
 
   async updatePromotion(id: string, promotionData: Partial<InsertPromotion>): Promise<Promotion> {
     const [promotion] = await db
       .update(promotions)
-      .set({ ...promotionData, updatedAt: new Date() })
+      .set(promotionData)
       .where(eq(promotions.id, id))
       .returning();
     return promotion;

@@ -128,7 +128,15 @@ export const accountPriceRelations = relations(accountPrices, ({ one }) => ({
 }));
 
 // Insert schemas
-export const insertFirmSchema = createInsertSchema(firms).omit({
+export const insertFirmSchema = createInsertSchema(firms, {
+  // Make platforms array optional with proper typing
+  platforms: z.array(z.string()).optional(),
+  // Make jsonb fields optional with proper typing
+  rulesEn: z.record(z.any()).optional(),
+  rulesKo: z.record(z.any()).optional(),
+  rulesJa: z.record(z.any()).optional(),
+  rulesHi: z.record(z.any()).optional(),
+}).omit({
   id: true,
   createdAt: true,
   updatedAt: true,
