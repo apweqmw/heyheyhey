@@ -1,0 +1,304 @@
+import { useState, useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { useLocation } from "wouter";
+import Header from "@/components/header";
+import FilterSortBar from "@/components/filter-sort-bar";
+import FirmListing from "@/components/firm-listing";
+import { useI18n } from "@/lib/i18n";
+import { useSEO } from "@/lib/seo";
+import { FirmWithDetails } from "@shared/schema";
+
+export default function Home() {
+  const [location] = useLocation();
+  const { locale, t } = useI18n();
+  const { setSEO } = useSEO();
+  
+  // Parse URL parameters
+  const urlParams = new URLSearchParams(window.location.search);
+  const [filters, setFilters] = useState({
+    sort: urlParams.get('sort') || 'discount_desc',
+    accountSize: urlParams.get('size') ? parseInt(urlParams.get('size')!) : undefined,
+    platform: urlParams.get('platform') || undefined,
+    maxPayoutDays: urlParams.get('maxPayout') ? parseInt(urlParams.get('maxPayout')!) : undefined,
+  });
+
+  // Fetch firms data
+  const { data: firms = [], isLoading, error } = useQuery<FirmWithDetails[]>({
+    queryKey: ['/api/firms', locale, filters.sort, filters.accountSize, filters.platform, filters.maxPayoutDays],
+    staleTime: 5 * 60 * 1000, // 5 minutes
+  });
+
+  // Update URL when filters change
+  useEffect(() => {
+    const params = new URLSearchParams();
+    if (filters.sort !== 'discount_desc') params.set('sort', filters.sort);
+    if (filters.accountSize) params.set('size', filters.accountSize.toString());
+    if (filters.platform) params.set('platform', filters.platform);
+    if (filters.maxPayoutDays) params.set('maxPayout', filters.maxPayoutDays.toString());
+    
+    const newUrl = `${window.location.pathname}${params.toString() ? '?' + params.toString() : ''}`;
+    window.history.replaceState({}, '', newUrl);
+  }, [filters]);
+
+  // Set SEO meta tags
+  useEffect(() => {
+    setSEO({
+      title: t('home.seo.title'),
+      description: t('home.seo.description'),
+      canonical: `/${locale}`,
+      structuredData: {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "name": t('home.seo.title'),
+        "description": t('home.seo.description'),
+        "itemListElement": firms.map((firm, index) => ({
+          "@type": "ListItem",
+          "position": index + 1,
+          "item": {
+            "@type": "Organization",
+            "name": firm.name,
+            "description": firm.descriptionEn,
+            "offers": {
+              "@type": "Offer",
+              "price": firm.finalPrice?.toString(),
+              "priceCurrency": "USD",
+            }
+          }
+        }))
+      }
+    });
+  }, [locale, firms, setSEO, t]);
+
+  // Calculate stats
+  const stats = {
+    totalFirms: firms.length,
+    avgDiscount: Math.round(firms.reduce((acc, firm) => acc + (firm.currentDiscount || 0), 0) / firms.length),
+    activePromotions: firms.filter(firm => firm.promotions.length > 0).length,
+    avgSavings: Math.round(firms.reduce((acc, firm) => {
+      if (!firm.accounts[0]) return acc;
+      const basePrice = Number(firm.accounts[0].basePrice);
+      const finalPrice = firm.finalPrice || basePrice;
+      return acc + (basePrice - finalPrice);
+    }, 0) / firms.length),
+    bestDiscount: Math.max(...firms.map(firm => firm.currentDiscount || 0)),
+  };
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-gray-50">
+        <Header />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div className="text-center">
+            <h1 className="text-2xl font-bold text-red-600 mb-4">{t('errors.loadFailed')}</h1>
+            <p className="text-gray-600">{t('errors.tryAgain')}</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      <Header />
+      <FilterSortBar filters={filters} onFiltersChange={setFilters} />
+      
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Page Header */}
+        <div className="mb-8">
+          <div className="flex items-center text-sm text-gray-500 mb-4">
+            <a href="#" className="hover:text-gray-700">{t('nav.home')}</a>
+            <i className="fas fa-chevron-right mx-2 text-xs"></i>
+            <span className="text-gray-900 font-medium">{t('nav.rankings')}</span>
+          </div>
+          
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div>
+              <h1 className="text-3xl font-bold text-gray-900 mb-2">{t('home.title')}</h1>
+              <p className="text-gray-600">
+                {t('home.subtitle', { count: stats.totalFirms })}
+              </p>
+            </div>
+            
+            <div className="flex items-center gap-4">
+              <div className="text-center">
+                <div className="text-2xl font-bold text-success-500" data-testid="avg-discount">
+                  {stats.avgDiscount}%
+                </div>
+                <div className="text-xs text-gray-500">{t('stats.avgDiscount')}</div>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl font-bold text-primary-500" data-testid="active-promotions">
+                  {stats.activePromotions}
+                </div>
+                <div className="text-xs text-gray-500">{t('stats.activeDeals')}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Firm Listings */}
+        <FirmListing firms={firms} isLoading={isLoading} />
+
+        {/* Quick Stats */}
+        <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <div className="text-2xl font-bold text-gray-900" data-testid="avg-savings">
+                  ${stats.avgSavings}
+                </div>
+                <div className="text-sm text-gray-600">{t('stats.avgSavings')}</div>
+                <div className="text-xs text-success-600 font-medium mt-1">
+                  <i className="fas fa-arrow-up mr-1"></i>{t('stats.vsLastMonth')}
+                </div>
+              </div>
+              <div className="w-12 h-12 bg-success-100 rounded-lg flex items-center justify-center">
+                <i className="fas fa-dollar-sign text-success-600"></i>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <div className="text-2xl font-bold text-gray-900" data-testid="best-discount">
+                  {stats.bestDiscount}%
+                </div>
+                <div className="text-sm text-gray-600">{t('stats.bestDiscount')}</div>
+                <div className="text-xs text-warning-600 font-medium mt-1">
+                  <i className="fas fa-clock mr-1"></i>{t('stats.limited')}
+                </div>
+              </div>
+              <div className="w-12 h-12 bg-warning-100 rounded-lg flex items-center justify-center">
+                <i className="fas fa-percent text-warning-600"></i>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <div className="text-2xl font-bold text-gray-900" data-testid="total-users">
+                  2.4K
+                </div>
+                <div className="text-sm text-gray-600">{t('stats.usersThisMonth')}</div>
+                <div className="text-xs text-primary-600 font-medium mt-1">
+                  <i className="fas fa-users mr-1"></i>{t('stats.activeCommunity')}
+                </div>
+              </div>
+              <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
+                <i className="fas fa-users text-primary-600"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* CTA Section */}
+        <div className="mt-8 bg-gradient-to-r from-primary-500 to-primary-600 rounded-xl shadow-lg text-white p-8">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-2xl font-bold mb-4">{t('cta.title')}</h2>
+            <p className="text-primary-100 mb-6">{t('cta.subtitle')}</p>
+            
+            <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+              <input 
+                type="email" 
+                placeholder={t('cta.emailPlaceholder')}
+                className="flex-1 px-4 py-3 rounded-lg text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary-500"
+                data-testid="newsletter-email"
+              />
+              <button className="bg-white text-primary-600 px-6 py-3 rounded-lg font-medium hover:bg-gray-50 transition-colors" data-testid="subscribe-button">
+                {t('cta.subscribe')}
+              </button>
+            </div>
+            
+            <div className="flex items-center justify-center space-x-6 mt-6 text-sm text-primary-100">
+              <span className="flex items-center">
+                <i className="fas fa-check-circle mr-2"></i>
+                {t('cta.weeklyUpdates')}
+              </span>
+              <span className="flex items-center">
+                <i className="fas fa-check-circle mr-2"></i>
+                {t('cta.exclusiveDeals')}
+              </span>
+              <span className="flex items-center">
+                <i className="fas fa-check-circle mr-2"></i>
+                {t('cta.noSpam')}
+              </span>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      {/* Footer */}
+      <footer className="bg-gray-900 text-white mt-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            {/* Brand */}
+            <div className="col-span-1">
+              <div className="flex items-center mb-4">
+                <div className="bg-primary-500 text-white p-2 rounded-lg mr-3">
+                  <i className="fas fa-chart-line text-xl"></i>
+                </div>
+                <span className="text-2xl font-bold">PropRank</span>
+              </div>
+              <p className="text-gray-400 text-sm mb-4">{t('footer.description')}</p>
+              <div className="flex space-x-4">
+                <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                  <i className="fab fa-twitter"></i>
+                </a>
+                <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                  <i className="fab fa-discord"></i>
+                </a>
+                <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                  <i className="fab fa-telegram"></i>
+                </a>
+              </div>
+            </div>
+
+            {/* Navigation */}
+            <div>
+              <h4 className="font-semibold mb-4">{t('footer.navigation')}</h4>
+              <ul className="space-y-2 text-sm">
+                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">{t('nav.rankings')}</a></li>
+                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">{t('nav.reviews')}</a></li>
+                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">{t('nav.guides')}</a></li>
+                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">{t('nav.news')}</a></li>
+              </ul>
+            </div>
+
+            {/* Resources */}
+            <div>
+              <h4 className="font-semibold mb-4">{t('footer.resources')}</h4>
+              <ul className="space-y-2 text-sm">
+                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">{t('footer.tradingRules')}</a></li>
+                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">{t('footer.payoutComparison')}</a></li>
+                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">{t('footer.platformGuide')}</a></li>
+              </ul>
+            </div>
+
+            {/* Legal */}
+            <div>
+              <h4 className="font-semibold mb-4">{t('footer.legal')}</h4>
+              <ul className="space-y-2 text-sm">
+                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">{t('footer.privacy')}</a></li>
+                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">{t('footer.terms')}</a></li>
+                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">{t('footer.disclaimer')}</a></li>
+              </ul>
+            </div>
+          </div>
+
+          {/* Bottom Bar */}
+          <div className="border-t border-gray-800 mt-8 pt-8 flex flex-col sm:flex-row justify-between items-center">
+            <p className="text-gray-400 text-sm">{t('footer.copyright')}</p>
+            <div className="flex items-center space-x-4 mt-4 sm:mt-0">
+              <div className="flex items-center space-x-2">
+                <div className="w-2 h-2 bg-success-500 rounded-full"></div>
+                <span className="text-gray-400 text-sm">{t('footer.operational')}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}
