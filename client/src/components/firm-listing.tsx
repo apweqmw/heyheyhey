@@ -35,8 +35,8 @@ export default function FirmListing({ firms, isLoading }: FirmListingProps) {
       <Card className="overflow-hidden">
         <CardContent className="p-0">
           {/* Table Header */}
-          <div className="bg-gray-50 px-6 py-4 border-b border-gray-200">
-            <div className="grid grid-cols-12 gap-4 items-center text-sm font-semibold text-gray-700">
+          <div className="bg-muted/50 px-6 py-4 border-b border-border">
+            <div className="grid grid-cols-12 gap-4 items-center text-sm font-semibold text-muted-foreground uppercase tracking-wider">
               <div className="col-span-3">{t('table.firm')}</div>
               <div className="col-span-2 text-center">{t('table.accountSize')}</div>
               <div className="col-span-2 text-center">{t('table.price')}</div>
@@ -47,7 +47,7 @@ export default function FirmListing({ firms, isLoading }: FirmListingProps) {
           </div>
 
           {/* Loading Skeletons */}
-          <div className="divide-y divide-gray-100">
+          <div className="divide-y divide-border">
             {Array.from({ length: 5 }).map((_, index) => (
               <div key={index} className="px-6 py-5">
                 <div className="grid grid-cols-12 gap-4 items-center">
@@ -100,8 +100,8 @@ export default function FirmListing({ firms, isLoading }: FirmListingProps) {
     <Card className="overflow-hidden">
       <CardContent className="p-0">
         {/* Table Header */}
-        <div className="bg-gray-50 px-6 py-4 border-b border-gray-200">
-          <div className="grid grid-cols-12 gap-4 items-center text-sm font-semibold text-gray-700">
+        <div className="bg-muted/50 px-6 py-4 border-b border-border">
+          <div className="grid grid-cols-12 gap-4 items-center text-sm font-semibold text-muted-foreground uppercase tracking-wider">
             <div className="col-span-3">{t('table.firm')}</div>
             <div className="col-span-2 text-center">{t('table.accountSize')}</div>
             <div className="col-span-2 text-center">{t('table.price')}</div>
@@ -112,7 +112,7 @@ export default function FirmListing({ firms, isLoading }: FirmListingProps) {
         </div>
 
         {/* Firm Rows */}
-        <div className="divide-y divide-gray-100">
+        <div className="divide-y divide-border">
           {firms.map((firm) => {
             const activePromotion = firm.promotions[0];
             const primaryAccount = firm.accounts[0];
@@ -122,8 +122,8 @@ export default function FirmListing({ firms, isLoading }: FirmListingProps) {
             return (
               <div
                 key={firm.id}
-                className={`px-6 py-5 hover:bg-gray-50 transition-colors ${
-                  firm.featured ? 'bg-gradient-to-r from-yellow-50 to-orange-50 border-l-4 border-l-accent-500' : ''
+                className={`px-6 py-5 hover:bg-muted/30 transition-colors ${
+                  firm.featured ? 'bg-gradient-to-r from-accent/10 to-accent/5 border-l-4 border-l-accent' : ''
                 }`}
                 data-testid={`firm-row-${firm.slug}`}
               >
@@ -132,7 +132,7 @@ export default function FirmListing({ firms, isLoading }: FirmListingProps) {
                   <div className="col-span-3">
                     <div className="flex items-center space-x-3">
                       {/* Firm Logo */}
-                      <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-600 rounded-lg flex items-center justify-center text-white font-bold flex-shrink-0">
+                      <div className="w-12 h-12 bg-gradient-to-br from-primary to-primary/80 rounded-lg flex items-center justify-center text-primary-foreground font-bold flex-shrink-0">
                         {firm.logoUrl ? (
                           <img src={firm.logoUrl} alt={firm.name} className="w-full h-full object-cover rounded-lg" />
                         ) : (
@@ -144,25 +144,25 @@ export default function FirmListing({ firms, isLoading }: FirmListingProps) {
                         <div className="flex items-center gap-2 mb-1">
                           <Link 
                             href={`/${locale}/firms/${firm.slug}`}
-                            className="font-semibold text-gray-900 hover:text-primary-600 transition-colors"
+                            className="font-semibold text-foreground hover:text-primary transition-colors"
                             data-testid={`firm-name-${firm.slug}`}
                           >
                             {firm.name}
                           </Link>
                           {firm.featured && (
-                            <Badge variant="secondary" className="bg-accent-500 text-white text-xs">
+                            <Badge variant="secondary" className="bg-accent text-accent-foreground text-xs">
                               <i className="fas fa-star mr-1"></i>
                               {t('labels.featured')}
                             </Badge>
                           )}
                           {activePromotion && (
-                            <Badge variant="destructive" className="bg-warning-500 text-white text-xs">
+                            <Badge variant="destructive" className="text-xs">
                               <i className="fas fa-clock mr-1"></i>
                               <CountdownTimer endTime={activePromotion.endsAt} />
                             </Badge>
                           )}
                         </div>
-                        <div className="flex items-center gap-3 text-sm text-gray-500">
+                        <div className="flex items-center gap-3 text-sm text-muted-foreground">
                           <span>⭐ {firm.rating ? Number(firm.rating).toFixed(1) : 'N/A'}</span>
                           <span>{firm.platforms?.join('/') || 'MT4/MT5'}</span>
                           <span>{firm.earliestPayoutDays}d {t('labels.payout')}</span>

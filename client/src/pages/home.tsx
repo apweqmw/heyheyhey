@@ -119,32 +119,32 @@ export default function Home() {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 md:py-8">
         {/* Page Header */}
         <div className="mb-8">
-          <div className="flex items-center text-sm text-gray-500 mb-4">
-            <a href="#" className="hover:text-gray-700">{t('nav.home')}</a>
+          <div className="flex items-center text-sm text-muted-foreground mb-4">
+            <a href="#" className="hover:text-foreground">{t('nav.home')}</a>
             <i className="fas fa-chevron-right mx-2 text-xs"></i>
-            <span className="text-gray-900 font-medium">{t('nav.rankings')}</span>
+            <span className="text-foreground font-medium">{t('nav.rankings')}</span>
           </div>
           
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900 mb-2">{t('home.title')}</h1>
-              <p className="text-gray-600">
+              <h1 className="text-3xl font-bold text-foreground mb-2">{t('home.title')}</h1>
+              <p className="text-muted-foreground">
                 {t('home.subtitle', { count: stats.totalFirms })}
               </p>
             </div>
             
             <div className="flex items-center gap-4">
-              <div className="text-center">
-                <div className="text-2xl font-bold text-success-500" data-testid="avg-discount">
+              <div className="text-center p-3 bg-muted/50 rounded-lg">
+                <div className="text-2xl font-bold text-green-600 dark:text-green-400" data-testid="avg-discount">
                   {stats.avgDiscount}%
                 </div>
-                <div className="text-xs text-gray-500">{t('stats.avgDiscount')}</div>
+                <div className="text-xs text-muted-foreground">{t('stats.avgDiscount')}</div>
               </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-primary-500" data-testid="active-promotions">
+              <div className="text-center p-3 bg-muted/50 rounded-lg">
+                <div className="text-2xl font-bold text-primary" data-testid="active-promotions">
                   {stats.activePromotions}
                 </div>
-                <div className="text-xs text-gray-500">{t('stats.activeDeals')}</div>
+                <div className="text-xs text-muted-foreground">{t('stats.activeDeals')}</div>
               </div>
             </div>
           </div>
@@ -155,77 +155,77 @@ export default function Home() {
 
         {/* Quick Stats */}
         <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          <div className="bg-card rounded-xl shadow-sm border border-border p-6">
             <div className="flex items-center justify-between">
               <div>
-                <div className="text-2xl font-bold text-gray-900" data-testid="avg-savings">
+                <div className="text-2xl font-bold text-foreground" data-testid="avg-savings">
                   ${stats.avgSavings}
                 </div>
-                <div className="text-sm text-gray-600">{t('stats.avgSavings')}</div>
-                <div className="text-xs text-success-600 font-medium mt-1">
+                <div className="text-sm text-muted-foreground">{t('stats.avgSavings')}</div>
+                <div className="text-xs text-green-600 dark:text-green-400 font-medium mt-1">
                   <i className="fas fa-arrow-up mr-1"></i>{t('stats.vsLastMonth')}
                 </div>
               </div>
-              <div className="w-12 h-12 bg-success-100 rounded-lg flex items-center justify-center">
-                <i className="fas fa-dollar-sign text-success-600"></i>
+              <div className="w-12 h-12 bg-green-100 dark:bg-green-900/20 rounded-lg flex items-center justify-center">
+                <i className="fas fa-dollar-sign text-green-600 dark:text-green-400"></i>
               </div>
             </div>
           </div>
 
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          <div className="bg-card rounded-xl shadow-sm border border-border p-6">
             <div className="flex items-center justify-between">
               <div>
-                <div className="text-2xl font-bold text-gray-900" data-testid="best-discount">
+                <div className="text-2xl font-bold text-foreground" data-testid="best-discount">
                   {stats.bestDiscount}%
                 </div>
-                <div className="text-sm text-gray-600">{t('stats.bestDiscount')}</div>
-                <div className="text-xs text-warning-600 font-medium mt-1">
+                <div className="text-sm text-muted-foreground">{t('stats.bestDiscount')}</div>
+                <div className="text-xs text-orange-600 dark:text-orange-400 font-medium mt-1">
                   <i className="fas fa-clock mr-1"></i>{t('stats.limited')}
                 </div>
               </div>
-              <div className="w-12 h-12 bg-warning-100 rounded-lg flex items-center justify-center">
-                <i className="fas fa-percent text-warning-600"></i>
+              <div className="w-12 h-12 bg-orange-100 dark:bg-orange-900/20 rounded-lg flex items-center justify-center">
+                <i className="fas fa-percent text-orange-600 dark:text-orange-400"></i>
               </div>
             </div>
           </div>
 
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          <div className="bg-card rounded-xl shadow-sm border border-border p-6">
             <div className="flex items-center justify-between">
               <div>
-                <div className="text-2xl font-bold text-gray-900" data-testid="total-users">
+                <div className="text-2xl font-bold text-foreground" data-testid="total-users">
                   2.4K
                 </div>
-                <div className="text-sm text-gray-600">{t('stats.usersThisMonth')}</div>
-                <div className="text-xs text-primary-600 font-medium mt-1">
+                <div className="text-sm text-muted-foreground">{t('stats.usersThisMonth')}</div>
+                <div className="text-xs text-primary font-medium mt-1">
                   <i className="fas fa-users mr-1"></i>{t('stats.activeCommunity')}
                 </div>
               </div>
-              <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
-                <i className="fas fa-users text-primary-600"></i>
+              <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
+                <i className="fas fa-users text-primary"></i>
               </div>
             </div>
           </div>
         </div>
 
         {/* CTA Section */}
-        <div className="mt-8 bg-gradient-to-r from-primary-500 to-primary-600 rounded-xl shadow-lg text-white p-8">
+        <div className="mt-8 bg-gradient-to-r from-primary to-primary/80 rounded-xl shadow-lg text-primary-foreground p-8">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-2xl font-bold mb-4">{t('cta.title')}</h2>
-            <p className="text-primary-100 mb-6">{t('cta.subtitle')}</p>
+            <p className="text-primary-foreground/80 mb-6">{t('cta.subtitle')}</p>
             
             <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
               <input 
                 type="email" 
                 placeholder={t('cta.emailPlaceholder')}
-                className="flex-1 px-4 py-3 rounded-lg text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary-500"
+                className="flex-1 px-4 py-3 rounded-lg text-foreground placeholder-muted-foreground focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-primary"
                 data-testid="newsletter-email"
               />
-              <button className="bg-white text-primary-600 px-6 py-3 rounded-lg font-medium hover:bg-gray-50 transition-colors" data-testid="subscribe-button">
+              <button className="bg-background text-primary px-6 py-3 rounded-lg font-medium hover:bg-background/90 transition-colors" data-testid="subscribe-button">
                 {t('cta.subscribe')}
               </button>
             </div>
             
-            <div className="flex items-center justify-center space-x-6 mt-6 text-sm text-primary-100">
+            <div className="flex items-center justify-center space-x-6 mt-6 text-sm text-primary-foreground/70">
               <span className="flex items-center">
                 <i className="fas fa-check-circle mr-2"></i>
                 {t('cta.weeklyUpdates')}
@@ -244,16 +244,16 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white mt-16">
+      <footer className="bg-gray-900 dark:bg-gray-950 text-white mt-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             {/* Brand */}
             <div className="col-span-1">
               <div className="flex items-center mb-4">
-                <div className="bg-primary-500 text-white p-2 rounded-lg mr-3">
+                <div className="bg-primary text-primary-foreground p-2 rounded-lg mr-3">
                   <i className="fas fa-chart-line text-xl"></i>
                 </div>
-                <span className="text-2xl font-bold">PropRank</span>
+                <span className="text-2xl font-bold">PropFirmMentor</span>
               </div>
               <p className="text-gray-400 text-sm mb-4">{t('footer.description')}</p>
               <div className="flex space-x-4">
