@@ -133,14 +133,14 @@ export default function Header() {
                   placeholder={t('header.searchPlaceholder')}
                   value={searchQuery}
                   onChange={handleInputChange}
-                  className="w-48 lg:w-64 pl-10 pr-4 py-2 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                  className="w-48 lg:w-64 pl-10 pr-4 py-2 bg-background border border-border rounded-lg focus:outline-none focus:ring-0 focus:border-border"
                   data-testid="search-input"
                 />
                 <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
               </form>
               
               {/* Search Results Dropdown */}
-              {showSearchResults && (
+              {showSearchResults && searchQuery.length > 0 && (
                 <Card className="absolute top-full mt-1 w-full lg:w-80 max-h-96 overflow-y-auto z-50 shadow-lg">
                   <CardContent className="p-2">
                     {filteredFirms.length > 0 ? (
@@ -255,7 +255,7 @@ export default function Header() {
               </form>
               
               {/* Mobile Search Results */}
-              {showSearchResults && (
+              {showSearchResults && searchQuery.length > 0 && (
                 <Card className="mt-2 max-h-64 overflow-y-auto">
                   <CardContent className="p-2">
                     {filteredFirms.length > 0 ? (

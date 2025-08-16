@@ -40,7 +40,7 @@ export default function LanguageSwitcher() {
         <Button
           variant="ghost"
           size="sm"
-          className="flex items-center space-x-2 px-3 py-2 hover:bg-gray-100 transition-colors"
+          className="flex items-center space-x-2 px-3 py-2 hover:bg-muted transition-colors"
           data-testid="language-switcher"
         >
           <span className="text-sm font-medium">
@@ -58,15 +58,15 @@ export default function LanguageSwitcher() {
               onClick={() => handleLanguageChange(language.code)}
               className={`w-full flex items-center px-3 py-2 text-sm rounded-md text-left transition-colors ${
                 locale === language.code
-                  ? 'bg-primary-100 text-primary-900 font-medium'
-                  : 'hover:bg-gray-100 text-gray-700'
+                  ? 'bg-primary/10 text-primary font-medium'
+                  : 'hover:bg-muted text-foreground'
               }`}
               data-testid={`language-option-${language.code}`}
             >
               <span className="mr-3">{language.flag}</span>
               <span>{language.name}</span>
               {locale === language.code && (
-                <i className="fas fa-check ml-auto text-primary-600"></i>
+                <i className="fas fa-check ml-auto text-primary"></i>
               )}
             </button>
           ))}
