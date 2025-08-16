@@ -145,9 +145,9 @@ export default function Header() {
               
               {/* Search Results Dropdown */}
               {showSearchResults && searchQuery.length > 0 && (
-                <Card className="absolute top-full mt-1 w-full lg:w-80 max-h-96 overflow-y-auto z-50 shadow-lg bg-background border border-border">
-                  <CardContent className="p-2">
-                    <div className="text-xs text-muted-foreground mb-2">
+                <div className="absolute top-full mt-1 w-full lg:w-80 max-h-96 overflow-y-auto z-[9999] shadow-lg bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
+                  <div className="p-3">
+                    <div className="text-xs text-gray-500 dark:text-gray-400 mb-2">
                       Found {filteredFirms.length} results for "{searchQuery}"
                     </div>
                     {filteredFirms.length > 0 ? (
@@ -156,7 +156,7 @@ export default function Header() {
                           <div
                             key={firm.id}
                             onClick={() => handleResultClick(firm.slug)}
-                            className="flex items-center gap-3 p-3 hover:bg-muted rounded-lg cursor-pointer transition-colors"
+                            className="flex items-center gap-3 p-3 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg cursor-pointer transition-colors"
                             data-testid={`search-result-${firm.slug}`}
                           >
                             <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white text-xs font-semibold flex-shrink-0">
@@ -171,8 +171,8 @@ export default function Header() {
                               )}
                             </div>
                             <div className="flex-1 min-w-0">
-                              <div className="font-medium text-sm">{firm.name}</div>
-                              <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                              <div className="font-medium text-sm text-gray-900 dark:text-white">{firm.name}</div>
+                              <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
                                 <div className="flex items-center gap-1">
                                   <Star className="h-3 w-3 fill-yellow-400 text-yellow-400" />
                                   <span>{firm.rating}</span>
@@ -192,12 +192,12 @@ export default function Header() {
                         ))}
                       </div>
                     ) : searchQuery.length > 0 ? (
-                      <div className="text-center py-4 text-muted-foreground text-sm">
+                      <div className="text-center py-4 text-gray-500 dark:text-gray-400 text-sm">
                         No firms found for "{searchQuery}"
                       </div>
                     ) : null}
-                  </CardContent>
-                </Card>
+                  </div>
+                </div>
               )}
             </div>
 
