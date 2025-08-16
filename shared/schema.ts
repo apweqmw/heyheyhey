@@ -26,6 +26,8 @@ export const firms = pgTable("firms", {
   rating: decimal("rating", { precision: 3, scale: 2 }),
   referralLink: text("referral_link"),
   couponCode: varchar("coupon_code"),
+  trustpilotUrl: text("trustpilot_url"), // URL to Trustpilot review page
+  trustpilotBusinessId: varchar("trustpilot_business_id"), // Trustpilot Business Unit ID
   
   // Trading evaluation details
   evaluationSteps: integer("evaluation_steps").default(2), // Usually 1 or 2 step process

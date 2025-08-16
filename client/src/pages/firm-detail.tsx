@@ -193,9 +193,45 @@ export default function FirmDetail() {
                   </div>
                 </div>
 
-                <p className="text-muted-foreground" data-testid="firm-description">
+                <p className="text-muted-foreground mb-6" data-testid="firm-description">
                   {getLocalizedDescription()}
                 </p>
+                
+                {/* Action Buttons */}
+                <div className="flex flex-wrap gap-3">
+                  <Button
+                    variant="outline"
+                    asChild
+                    data-testid="view-reviews-button"
+                  >
+                    <a href={`/${locale}/reviews/${firm.slug}`}>
+                      <i className="fas fa-star mr-2"></i>
+                      {t('nav.reviews')}
+                    </a>
+                  </Button>
+                  {firm.trustpilotUrl && (
+                    <Button
+                      variant="outline"
+                      asChild
+                      data-testid="trustpilot-button"
+                    >
+                      <a href={firm.trustpilotUrl} target="_blank" rel="noopener noreferrer">
+                        <i className="fas fa-external-link-alt mr-2"></i>
+                        Trustpilot
+                      </a>
+                    </Button>
+                  )}
+                  <Button
+                    variant="outline"
+                    asChild
+                    data-testid="visit-website-button"
+                  >
+                    <a href={firm.websiteUrl} target="_blank" rel="noopener noreferrer">
+                      <i className="fas fa-globe mr-2"></i>
+                      Visit Website
+                    </a>
+                  </Button>
+                </div>
               </div>
             </div>
           </CardContent>

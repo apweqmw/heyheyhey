@@ -8,6 +8,7 @@ import { I18nProvider } from "./lib/i18n";
 import { SEOProvider } from "./lib/seo";
 import Home from "@/pages/home";
 import FirmDetail from "@/pages/firm-detail";
+import Reviews from "@/pages/reviews";
 import Admin from "@/pages/admin";
 import NotFound from "@/pages/not-found";
 
@@ -17,6 +18,7 @@ function Router() {
       <Route path="/" component={Home} />
       <Route path="/:locale" component={Home} />
       <Route path="/:locale/firms/:slug" component={FirmDetail} />
+      <Route path="/:locale/reviews/:slug" component={Reviews} />
       <Route path="/admin" component={Admin} />
       <Route component={NotFound} />
     </Switch>

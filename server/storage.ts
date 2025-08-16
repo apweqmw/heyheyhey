@@ -49,6 +49,12 @@ export interface IStorage {
   // Sync operations for Airflow
   syncFirms(firms: Partial<InsertFirm>[]): Promise<{ success: number; errors: string[] }>;
   syncPromotions(promotions: Partial<InsertPromotion>[]): Promise<{ success: number; errors: string[] }>;
+  
+  // Review operations
+  getReviewsByFirmSlug(slug: string, options?: {
+    stars?: string;
+    sort?: string;
+  }): Promise<{ reviews: any[]; stats: any }>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -334,6 +340,105 @@ export class DatabaseStorage implements IStorage {
     }
 
     return { success, errors };
+  }
+
+  async getReviewsByFirmSlug(slug: string, options: {
+    stars?: string;
+    sort?: string;
+  } = {}): Promise<{ reviews: any[]; stats: any }> {
+    try {
+      // Get firm details first
+      const [firm] = await db.select().from(firms).where(eq(firms.slug, slug));
+      
+      if (!firm) {
+        return { reviews: [], stats: { averageStars: 0, totalReviews: 0, distribution: {}, trustScore: 0 } };
+      }
+
+      // For now, return mock data since we need Trustpilot API integration
+      // In a real implementation, this would fetch from Trustpilot API using firm.trustpilotBusinessId
+      const mockReviews = [
+        {
+          id: "1",
+          title: "Great trading experience",
+          text: "I've been trading with this firm for 6 months now and the experience has been excellent. Fast payouts and good customer support.",
+          stars: 5,
+          createdAt: "2024-01-15T10:30:00Z",
+          consumer: {
+            displayName: "TradingPro123",
+            countryCode: "US"
+          },
+          businessReply: {
+            text: "Thank you for your positive feedback! We're glad to hear about your success.",
+            createdAt: "2024-01-16T09:15:00Z"
+          }
+        },
+        {
+          id: "2", 
+          title: "Professional platform",
+          text: "The platform is very professional and user-friendly. The evaluation process was clear and fair.",
+          stars: 4,
+          createdAt: "2024-01-10T14:20:00Z",
+          consumer: {
+            displayName: "ForexTrader88",
+            countryCode: "GB"
+          }
+        },
+        {
+          id: "3",
+          title: "Good but could be better",
+          text: "Overall good experience but the spreads could be tighter during news events.",
+          stars: 3,
+          createdAt: "2024-01-05T16:45:00Z",
+          consumer: {
+            displayName: "SwingTrader",
+            countryCode: "CA"
+          }
+        }
+      ];
+
+      const mockStats = {
+        averageStars: 4.1,
+        totalReviews: 156,
+        distribution: {
+          "5": 78,
+          "4": 45,
+          "3": 20,
+          "2": 8,
+          "1": 5
+        },
+        trustScore: 85
+      };
+
+      // Apply filters
+      let filteredReviews = mockReviews;
+      
+      if (options.stars && options.stars !== 'all') {
+        const targetStars = parseInt(options.stars);
+        filteredReviews = mockReviews.filter(review => review.stars === targetStars);
+      }
+
+      // Apply sorting
+      switch (options.sort) {
+        case 'oldest':
+          filteredReviews.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
+          break;
+        case 'highest':
+          filteredReviews.sort((a, b) => b.stars - a.stars);
+          break;
+        case 'lowest':
+          filteredReviews.sort((a, b) => a.stars - b.stars);
+          break;
+        case 'newest':
+        default:
+          filteredReviews.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+          break;
+      }
+
+      return { reviews: filteredReviews, stats: mockStats };
+    } catch (error) {
+      console.error('Error fetching reviews:', error);
+      return { reviews: [], stats: { averageStars: 0, totalReviews: 0, distribution: {}, trustScore: 0 } };
+    }
   }
 }
 
