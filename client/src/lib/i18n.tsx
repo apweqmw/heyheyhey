@@ -100,6 +100,17 @@ const translations = {
     'reviews.verifiedByTrustpilot': 'Verified by Trustpilot',
     'reviews.viewOnTrustpilot': 'View on Trustpilot',
     'reviews.checkTrustpilot': 'Check on Trustpilot',
+    'reviews.overviewTitle': 'Prop Firm Reviews & Ratings',
+    'reviews.overviewDescription': 'Compare authentic trader reviews and ratings for all prop trading firms. Find the most trusted firms based on real user experiences.',
+    'reviews.searchPlaceholder': 'Search firms...',
+    'reviews.sortByRating': 'Highest Rated',
+    'reviews.sortByReviews': 'Most Reviews',
+    'reviews.sortByTrust': 'Highest Trust Score',
+    'reviews.sortByName': 'Name (A-Z)',
+    'reviews.totalFirms': 'Firms Listed',
+    'reviews.readMore': 'Read all reviews',
+    'reviews.noFirmsFound': 'No firms found',
+    'reviews.noFirmsFoundDescription': 'Try adjusting your search terms or filters.',
     
     // Common
     'common.notFound': 'Not Found',

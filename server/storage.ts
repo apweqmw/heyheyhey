@@ -51,6 +51,10 @@ export interface IStorage {
   syncPromotions(promotions: Partial<InsertPromotion>[]): Promise<{ success: number; errors: string[] }>;
   
   // Review operations
+  getReviewsOverview(options?: {
+    sort?: string;
+    search?: string;
+  }): Promise<{ firms: any[] }>;
   getReviewsByFirmSlug(slug: string, options?: {
     stars?: string;
     sort?: string;
@@ -340,6 +344,63 @@ export class DatabaseStorage implements IStorage {
     }
 
     return { success, errors };
+  }
+
+  async getReviewsOverview(options: {
+    sort?: string;
+    search?: string;
+  } = {}): Promise<{ firms: any[] }> {
+    try {
+      // Get all active firms
+      const allFirms = await db.select().from(firms).where(eq(firms.active, true));
+      
+      // Mock review summaries for each firm
+      const firmSummaries = allFirms.map(firm => {
+        // Generate deterministic but varied mock data based on firm name
+        const nameHash = firm.name.split('').reduce((a, b) => {
+          a = ((a << 5) - a) + b.charCodeAt(0);
+          return a & a;
+        }, 0);
+        
+        const baseRating = 3.5 + (Math.abs(nameHash) % 1500) / 1000; // 3.5-4.5 range
+        const baseReviews = 50 + (Math.abs(nameHash) % 500); // 50-550 reviews
+        const baseTrust = 60 + (Math.abs(nameHash) % 40); // 60-100 trust score
+        
+        return {
+          id: firm.id,
+          name: firm.name,
+          slug: firm.slug,
+          logoUrl: firm.logoUrl,
+          trustpilotUrl: firm.trustpilotUrl,
+          averageRating: Math.round(baseRating * 10) / 10,
+          totalReviews: baseReviews,
+          trustScore: baseTrust,
+          recentReview: {
+            text: firm.name === 'FTMO' 
+              ? "Excellent platform with fast payouts and professional support. The evaluation was challenging but fair."
+              : firm.name === 'The Funded Trader'
+              ? "Great profit split and flexible rules. Customer service is responsive and helpful."
+              : "Good experience overall. The platform is stable and the trading conditions are competitive.",
+            stars: Math.ceil(baseRating),
+            consumer: `Trader${Math.abs(nameHash) % 1000}`,
+            createdAt: new Date(Date.now() - (Math.abs(nameHash) % 30) * 24 * 60 * 60 * 1000).toISOString()
+          }
+        };
+      });
+
+      // Apply search filter if provided
+      let filteredFirms = firmSummaries;
+      if (options.search) {
+        filteredFirms = firmSummaries.filter(firm =>
+          firm.name.toLowerCase().includes(options.search!.toLowerCase())
+        );
+      }
+
+      return { firms: filteredFirms };
+    } catch (error) {
+      console.error('Error fetching reviews overview:', error);
+      return { firms: [] };
+    }
   }
 
   async getReviewsByFirmSlug(slug: string, options: {

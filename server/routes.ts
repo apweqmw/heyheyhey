@@ -110,6 +110,28 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // GET /api/reviews/overview - Get review overview for all firms
+  app.get('/api/reviews/overview', async (req, res) => {
+    try {
+      const { sort = 'rating', search } = req.query;
+
+      const overviewData = await storage.getReviewsOverview({
+        sort: String(sort),
+        search: search ? String(search) : undefined,
+      });
+      
+      res.set({
+        'Cache-Control': 'public, s-maxage=1800, stale-while-revalidate=3600',
+        'Content-Type': 'application/json',
+      });
+      
+      res.json(overviewData);
+    } catch (error) {
+      console.error('Error fetching reviews overview:', error);
+      res.status(500).json({ message: 'Failed to fetch reviews overview' });
+    }
+  });
+
   // GET /api/reviews/:slug - Get reviews for a firm
   app.get('/api/reviews/:slug', async (req, res) => {
     try {
