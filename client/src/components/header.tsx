@@ -70,6 +70,7 @@ export default function Header() {
     console.log('Firms data available:', firms?.length || 0);
     console.log('Filtered firms:', filteredFirms.length);
     console.log('Show results:', value.length > 0);
+    console.log('showSearchResults state:', showSearchResults);
   };
 
   const handleResultClick = (slug: string) => {
@@ -93,7 +94,7 @@ export default function Header() {
   }, []);
 
   return (
-    <header className="bg-card shadow-sm border-b border-border sticky top-0 z-40 backdrop-blur-md bg-card/95">
+    <header className="bg-card shadow-sm border-b border-border sticky top-0 z-50 backdrop-blur-md bg-card/95">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo - Responsive sizing */}
@@ -145,9 +146,16 @@ export default function Header() {
               
               {/* Search Results Dropdown */}
               {showSearchResults && searchQuery.length > 0 && (
-                <div className="absolute top-full mt-1 w-full lg:w-80 max-h-96 overflow-y-auto z-[9999] shadow-lg bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
+                <div 
+                  className="absolute top-full left-0 mt-1 w-full lg:w-80 max-h-96 overflow-y-auto shadow-xl border rounded-lg"
+                  style={{
+                    zIndex: 10000,
+                    backgroundColor: 'white',
+                    borderColor: '#e5e7eb'
+                  }}
+                >
                   <div className="p-3">
-                    <div className="text-xs text-gray-500 dark:text-gray-400 mb-2">
+                    <div className="text-xs text-gray-500 mb-2">
                       Found {filteredFirms.length} results for "{searchQuery}"
                     </div>
                     {filteredFirms.length > 0 ? (
