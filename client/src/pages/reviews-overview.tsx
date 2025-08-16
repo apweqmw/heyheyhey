@@ -154,11 +154,10 @@ export default function ReviewsOverview() {
 
   // Get all firms with review summaries
   const { data: firmsData, isLoading } = useQuery({
-    queryKey: ["/api/reviews/overview", { sort: sortBy, search: searchQuery }],
+    queryKey: ["/api/reviews/overview", { sort: sortBy }],
     queryFn: async () => {
       const params = new URLSearchParams({
-        sort: sortBy,
-        ...(searchQuery && { search: searchQuery })
+        sort: sortBy
       });
       const response = await fetch(`/api/reviews/overview?${params}`);
       if (!response.ok) throw new Error('Failed to fetch reviews overview');
@@ -168,8 +167,9 @@ export default function ReviewsOverview() {
 
   const firms: FirmReviewSummary[] = firmsData?.firms || [];
 
+  // Client-side filtering for real-time search
   const filteredFirms = firms.filter(firm =>
-    firm.name.toLowerCase().includes(searchQuery.toLowerCase())
+    searchQuery === "" || firm.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   const sortedFirms = [...filteredFirms].sort((a, b) => {
