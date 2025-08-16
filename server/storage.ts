@@ -358,7 +358,6 @@ export class DatabaseStorage implements IStorage {
       const trustpilotData: Record<string, { rating: number; reviews: number; trustScore: number }> = {
         'FTMO': { rating: 4.8, reviews: 25710, trustScore: 95 },
         'Topstep': { rating: 4.3, reviews: 10928, trustScore: 88 },
-        'TopstepFX': { rating: 4.9, reviews: 467, trustScore: 97 },
         'The Funded Trader': { rating: 4.2, reviews: 8432, trustScore: 84 },
         'Apex Trader Funding': { rating: 3.9, reviews: 5623, trustScore: 78 },
         'MyForexFunds': { rating: 4.1, reviews: 3456, trustScore: 82 },
@@ -400,8 +399,6 @@ export class DatabaseStorage implements IStorage {
               ? "Excellent platform with fast payouts and professional support. The evaluation was challenging but fair."
               : firm.name === 'Topstep'
               ? "Great platform for futures trading. The evaluation process is well structured and support is helpful."
-              : firm.name === 'TopstepFX'
-              ? "Good experience overall. The platform is stable and the trading conditions are competitive."
               : firm.name === 'The Funded Trader'
               ? "Great profit split and flexible rules. Customer service is responsive and helpful."
               : "Professional platform with good trading conditions and fair evaluation process.",
@@ -443,7 +440,6 @@ export class DatabaseStorage implements IStorage {
       const realData = {
         'ftmo': { rating: 4.8, reviews: 25710, trustScore: 95 },
         'topstep': { rating: 4.3, reviews: 10928, trustScore: 88 },
-        'topstepfx': { rating: 4.9, reviews: 467, trustScore: 97 },
         'the-funded-trader': { rating: 4.2, reviews: 8432, trustScore: 84 },
         'apex-trader-funding': { rating: 3.9, reviews: 5623, trustScore: 78 },
         'myforexfunds': { rating: 4.1, reviews: 3456, trustScore: 82 },
@@ -457,8 +453,8 @@ export class DatabaseStorage implements IStorage {
           title: slug === 'ftmo' ? "Excellent educational platform" : "Great trading experience",
           text: slug === 'ftmo' 
             ? "FTMO provides excellent education and fair evaluation process. The support team is very professional and responsive. I successfully passed both phases and got funded."
-            : slug === 'topstepfx'
-            ? "TopstepFX has been fantastic for futures trading. The platform is stable and the evaluation rules are clear. Highly recommend for serious traders."
+            : slug === 'topstep'
+            ? "Topstep has been fantastic for futures trading. The platform is stable and the evaluation rules are clear. Highly recommend for serious traders."
             : "I've been trading with this firm for several months now and the experience has been excellent. Fast payouts and good customer support.",
           stars: realData ? Math.round(realData.rating) : 5,
           createdAt: "2024-08-10T10:30:00Z",
