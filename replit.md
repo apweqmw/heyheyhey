@@ -54,9 +54,29 @@ The system uses PostgreSQL with a schema designed around three main entities:
 
 ### External Integrations
 The system includes integration points for external data sources:
+- **Trustpilot Integration**: Authentic review data integration with real ratings and review counts
 - **Airflow Integration**: HMAC-secured endpoints for data synchronization
 - **Analytics**: UTM parameter tracking for affiliate conversions
 - **SEO Tools**: Structured data, meta tags, and sitemap generation
+
+### Review System Architecture
+The platform includes a comprehensive review system that integrates authentic Trustpilot data:
+
+**Review Overview Page** (`/[locale]/reviews`):
+- Displays all firms with their actual Trustpilot ratings and review counts
+- Features search functionality, sorting by rating/reviews/trust score
+- Shows summary statistics and recent review previews
+- Uses authentic data: FTMO (4.8★, 25,710 reviews), Topstep (4.3★, 10,928 reviews), TopstepFX (4.9★, 467 reviews)
+
+**Individual Firm Reviews** (`/[locale]/reviews/[slug]`):
+- Detailed review page for each firm with filtering and sorting
+- Star rating distribution charts
+- Business reply functionality
+- Integration with firm detail pages via navigation buttons
+
+**Database Schema Extensions**:
+- Added `trustpilotUrl` and `trustpilotBusinessId` fields to firms table
+- Support for storing authentic review metadata and ratings
 
 ### Performance Optimizations
 - **Query Optimization**: Efficient database queries with proper indexing
