@@ -65,12 +65,17 @@ export default function Header() {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setSearchQuery(value);
-    setShowSearchResults(value.length > 0);
+    const shouldShow = value.length > 0;
+    setShowSearchResults(shouldShow);
     console.log('Searching for:', value);
     console.log('Firms data available:', firms?.length || 0);
     console.log('Filtered firms:', filteredFirms.length);
-    console.log('Show results:', value.length > 0);
-    console.log('showSearchResults state:', showSearchResults);
+    console.log('Should show results:', shouldShow);
+    
+    // Force re-render by using setTimeout
+    setTimeout(() => {
+      setShowSearchResults(shouldShow);
+    }, 0);
   };
 
   const handleResultClick = (slug: string) => {

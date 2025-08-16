@@ -244,6 +244,24 @@ const translations = {
     'labels.rating': '평점',
     'labels.payoutSplit': '지급 분할',
     
+    // Reviews
+    'reviews.title': '프롭 회사 리뷰',
+    'reviews.subtitle': '실제 트레이더의 인증된 리뷰',
+    'reviews.totalReviews': '총 리뷰',
+    'reviews.averageRating': '평균 평점',
+    'reviews.trustScore': '신뢰 점수',
+    'reviews.readMore': '더 보기',
+    'reviews.businessReply': '비즈니스 답변',
+    'reviews.ratingDistribution': '평점 분포',
+    'reviews.allReviews': '모든 리뷰',
+    'reviews.searchPlaceholder': '회사 검색...',
+    'reviews.sortBy': '정렬',
+    'reviews.sortRating': '평점',
+    'reviews.sortReviews': '리뷰 수',
+    'reviews.sortTrust': '신뢰 점수',
+    'reviews.noResults': '검색 결과가 없습니다',
+    'reviews.tryDifferent': '다른 검색어를 시도해보세요',
+    
     // Actions
     'actions.getChallenge': '챌린지 받기',
     'actions.loadMore': '더 보기',

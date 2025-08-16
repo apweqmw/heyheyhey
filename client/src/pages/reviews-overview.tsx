@@ -60,8 +60,8 @@ function FirmReviewCard({ firm }: { firm: FirmReviewSummary }) {
   return (
     <Card className="hover:shadow-lg transition-shadow duration-200" data-testid={`firm-review-card-${firm.slug}`}>
       <CardHeader className="pb-4">
-        <div className="flex items-start justify-between">
-          <div className="flex items-center gap-4">
+        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+          <div className="flex items-center gap-4 flex-1">
             <div className="h-12 w-12 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-semibold flex-shrink-0">
               {firm.logoUrl ? (
                 <img
@@ -73,13 +73,13 @@ function FirmReviewCard({ firm }: { firm: FirmReviewSummary }) {
                 firm.name.substring(0, 2).toUpperCase()
               )}
             </div>
-            <div>
+            <div className="flex-1 min-w-0">
               <Link href={`/${locale}/reviews/${firm.slug}`}>
-                <h3 className="font-semibold text-lg hover:text-primary transition-colors" data-testid={`firm-name-${firm.slug}`}>
+                <h3 className="font-semibold text-lg hover:text-primary transition-colors truncate" data-testid={`firm-name-${firm.slug}`}>
                   {firm.name}
                 </h3>
               </Link>
-              <div className="flex items-center gap-3 mt-1">
+              <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3 mt-1">
                 <StarRating rating={firm.averageRating} size="sm" />
                 <span className="text-sm text-muted-foreground">
                   {firm.totalReviews.toLocaleString()} {t('reviews.totalReviews')}
@@ -88,10 +88,11 @@ function FirmReviewCard({ firm }: { firm: FirmReviewSummary }) {
             </div>
           </div>
           
-          <div className="flex flex-col items-end gap-2">
+          <div className="flex flex-row sm:flex-col items-center sm:items-end gap-2 flex-shrink-0">
             <Badge 
               variant={firm.trustScore >= 80 ? "default" : firm.trustScore >= 60 ? "secondary" : "destructive"}
               data-testid={`trust-score-${firm.slug}`}
+              className="whitespace-nowrap"
             >
               <TrendingUp className="h-3 w-3 mr-1" />
               {firm.trustScore}/100
@@ -102,6 +103,7 @@ function FirmReviewCard({ firm }: { firm: FirmReviewSummary }) {
                 size="sm"
                 asChild
                 data-testid={`trustpilot-link-${firm.slug}`}
+                className="whitespace-nowrap"
               >
                 <a href={firm.trustpilotUrl} target="_blank" rel="noopener noreferrer">
                   <ExternalLink className="h-3 w-3 mr-1" />
