@@ -162,7 +162,7 @@ const translations = {
     'footer.privacy': 'Privacy Policy',
     'footer.terms': 'Terms of Service',
     'footer.disclaimer': 'Disclaimer',
-    'footer.copyright': '© 2024 PropRank. All rights reserved.',
+    'footer.copyright': '© 2025 PropFirmMentor. All rights reserved.',
     'footer.operational': 'All systems operational',
     
     // Listing
@@ -311,7 +311,7 @@ const translations = {
     'footer.privacy': '개인정보 처리방침',
     'footer.terms': '서비스 약관',
     'footer.disclaimer': '면책 조항',
-    'footer.copyright': '© 2024 PropRank. 모든 권리 보유.',
+    'footer.copyright': '© 2025 PropFirmMentor. 모든 권리 보유.',
     'footer.operational': '모든 시스템 정상 작동',
     
     // Listing

@@ -210,7 +210,7 @@ The application is configured for Replit Deployments:
 
 ## 📝 License
 
-This project is proprietary software. All rights reserved.
+© 2025 PropFirmMentor. All rights reserved.
 
 ## 🆘 Support
 
