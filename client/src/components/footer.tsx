@@ -69,9 +69,16 @@ export default function Footer() {
           <div>
             <h4 className="font-semibold mb-4">{t('footer.resources')}</h4>
             <ul className="space-y-2 text-sm">
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">{t('footer.tradingRules')}</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">{t('footer.payoutComparison')}</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">{t('footer.platformGuide')}</a></li>
+              <li>
+                <Link href={`/${locale}/guides/trading-rules-complete-guide`} className="text-gray-400 hover:text-white transition-colors">
+                  {t('footer.tradingRules')}
+                </Link>
+              </li>
+              <li>
+                <Link href={`/${locale}/guides/platform-guide-comparison`} className="text-gray-400 hover:text-white transition-colors">
+                  {t('footer.platformGuide')}
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -79,9 +86,21 @@ export default function Footer() {
           <div>
             <h4 className="font-semibold mb-4">{t('footer.legal')}</h4>
             <ul className="space-y-2 text-sm">
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">{t('footer.privacy')}</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">{t('footer.terms')}</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">{t('footer.disclaimer')}</a></li>
+              <li>
+                <Link href={`/${locale}/privacy`} className="text-gray-400 hover:text-white transition-colors">
+                  {t('footer.privacy')}
+                </Link>
+              </li>
+              <li>
+                <Link href={`/${locale}/terms`} className="text-gray-400 hover:text-white transition-colors">
+                  {t('footer.terms')}
+                </Link>
+              </li>
+              <li>
+                <Link href={`/${locale}/disclaimer`} className="text-gray-400 hover:text-white transition-colors">
+                  {t('footer.disclaimer')}
+                </Link>
+              </li>
             </ul>
           </div>
         </div>

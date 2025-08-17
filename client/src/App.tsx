@@ -13,6 +13,9 @@ import Guides from "@/pages/guides";
 import GuideDetail from "./pages/guide-detail";
 import News from "@/pages/news";
 import NewsDetail from "./pages/news-detail";
+import Privacy from "./pages/privacy";
+import Terms from "./pages/terms";
+import Disclaimer from "./pages/disclaimer";
 import Admin from "@/pages/admin";
 import NotFound from "@/pages/not-found";
 
@@ -27,6 +30,9 @@ function Router() {
       <Route path="/:locale/guides" component={Guides} />
       <Route path="/:locale/news/:slug" component={NewsDetail} />
       <Route path="/:locale/news" component={News} />
+      <Route path="/:locale/privacy" component={Privacy} />
+      <Route path="/:locale/terms" component={Terms} />
+      <Route path="/:locale/disclaimer" component={Disclaimer} />
       <Route path="/admin" component={Admin} />
       <Route component={NotFound} />
     </Switch>
