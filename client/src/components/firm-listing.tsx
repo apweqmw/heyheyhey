@@ -266,11 +266,7 @@ export default function FirmListing({ firms, isLoading }: FirmListingProps) {
                           
                           {/* Get Challenge Button */}
                           <Button
-                            className={`w-full font-medium transition-colors ${
-                              firm.featured 
-                                ? 'bg-accent hover:bg-accent/90' 
-                                : 'bg-primary hover:bg-primary/90'
-                            } text-primary-foreground`}
+                            className="w-full font-medium bg-primary hover:bg-primary/90 text-primary-foreground transition-colors"
                             onClick={() => handleGetChallenge(firm, primaryAccount || firm.accounts[0])}
                             data-testid={`get-challenge-${firm.slug}`}
                           >
@@ -433,11 +429,7 @@ export default function FirmListing({ firms, isLoading }: FirmListingProps) {
 
                 {/* Get Challenge Button */}
                 <Button
-                  className={`w-full font-medium transition-colors ${
-                    firm.featured 
-                      ? 'bg-accent hover:bg-accent/90' 
-                      : 'bg-primary hover:bg-primary/90'
-                  } text-primary-foreground`}
+                  className="w-full font-medium bg-primary hover:bg-primary/90 text-primary-foreground transition-colors"
                   onClick={() => handleGetChallenge(firm, primaryAccount || firm.accounts[0])}
                   data-testid={`get-challenge-mobile-${firm.slug}`}
                 >
