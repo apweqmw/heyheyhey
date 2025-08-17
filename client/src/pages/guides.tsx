@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "@/components/header";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -36,7 +36,7 @@ const guides: Guide[] = [
     rating: 4.8,
     slug: "complete-guide-prop-trading-firms",
     tags: ["prop-trading", "beginner", "fundamentals"],
-    publishedAt: "2024-08-15"
+    publishedAt: "2025-08-15"
   },
   {
     id: "2",
@@ -49,7 +49,7 @@ const guides: Guide[] = [
     rating: 4.9,
     slug: "pass-prop-firm-evaluations",
     tags: ["evaluation", "strategy", "funded-account"],
-    publishedAt: "2024-08-12"
+    publishedAt: "2025-08-12"
   },
   {
     id: "3",
@@ -62,7 +62,7 @@ const guides: Guide[] = [
     rating: 4.7,
     slug: "risk-management-prop-traders",
     tags: ["risk-management", "psychology", "money-management"],
-    publishedAt: "2024-08-10"
+    publishedAt: "2025-08-10"
   },
   {
     id: "4",
@@ -75,7 +75,7 @@ const guides: Guide[] = [
     rating: 4.6,
     slug: "best-trading-platforms-prop-firms",
     tags: ["platforms", "technology", "tools"],
-    publishedAt: "2024-08-08"
+    publishedAt: "2025-08-08"
   },
   {
     id: "5",
@@ -88,7 +88,7 @@ const guides: Guide[] = [
     rating: 4.9,
     slug: "advanced-forex-strategies-funded-accounts",
     tags: ["forex", "advanced", "strategies"],
-    publishedAt: "2024-08-05"
+    publishedAt: "2025-08-05"
   },
   {
     id: "6",
@@ -101,7 +101,7 @@ const guides: Guide[] = [
     rating: 4.5,
     slug: "prop-firm-rules-guide",
     tags: ["rules", "compliance", "violations"],
-    publishedAt: "2024-08-03"
+    publishedAt: "2025-08-03"
   }
 ];
 
@@ -192,11 +192,13 @@ export default function Guides() {
   const [selectedDifficulty, setSelectedDifficulty] = useState("All");
 
   // Set SEO data
-  setSEO({
-    title: t('guides.title', 'Trading Guides & Tutorials'),
-    description: t('guides.description', 'Comprehensive guides and tutorials for prop trading success. Learn strategies, risk management, and platform tips.'),
-    canonical: `/${locale}/guides`,
-  });
+  useEffect(() => {
+    setSEO({
+      title: t('guides.title') || 'Trading Guides & Tutorials',
+      description: t('guides.description') || 'Comprehensive guides and tutorials for prop trading success. Learn strategies, risk management, and platform tips.',
+      canonical: `/${locale}/guides`,
+    });
+  }, [locale, setSEO, t]);
 
   // Filter guides based on search and filters
   const filteredGuides = guides.filter(guide => {

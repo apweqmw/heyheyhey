@@ -457,14 +457,14 @@ export class DatabaseStorage implements IStorage {
             ? "Topstep has been fantastic for futures trading. The platform is stable and the evaluation rules are clear. Highly recommend for serious traders."
             : "I've been trading with this firm for several months now and the experience has been excellent. Fast payouts and good customer support.",
           stars: realData ? Math.round(realData.rating) : 5,
-          createdAt: "2024-08-10T10:30:00Z",
+          createdAt: "2025-08-10T10:30:00Z",
           consumer: {
             displayName: slug === 'ftmo' ? "TradingEducator" : "TradingPro123",
             countryCode: "US"
           },
           businessReply: {
             text: "Thank you for your positive feedback! We're glad to hear about your success with our platform.",
-            createdAt: "2024-08-11T09:15:00Z"
+            createdAt: "2025-08-11T09:15:00Z"
           }
         },
         {
@@ -474,7 +474,7 @@ export class DatabaseStorage implements IStorage {
             ? "The platform is very professional and user-friendly. The evaluation process was challenging but fair. Customer service responds quickly to queries."
             : "The platform is very professional and user-friendly. The evaluation process was clear and fair.",
           stars: realData ? Math.max(1, Math.round(realData.rating) - 1) : 4,
-          createdAt: "2024-08-05T14:20:00Z",
+          createdAt: "2025-08-05T14:20:00Z",
           consumer: {
             displayName: slug === 'ftmo' ? "FTMOSuccess" : "ForexTrader88",
             countryCode: "GB"
@@ -487,7 +487,7 @@ export class DatabaseStorage implements IStorage {
             ? "Great educational resources and fair evaluation. The only minor issue is that some features could be more intuitive, but overall very satisfied."
             : "Overall good experience but the spreads could be tighter during news events.",
           stars: realData ? Math.max(1, Math.round(realData.rating) - 1) : 3,
-          createdAt: "2024-07-28T16:45:00Z",
+          createdAt: "2025-07-28T16:45:00Z",
           consumer: {
             displayName: "SwingTrader",
             countryCode: "CA"

@@ -22,9 +22,9 @@ const translations = {
     'header.searchPlaceholder': 'Search firms...',
     
     // Home page
-    'home.title': 'Best Prop Trading Firms 2024',
+    'home.title': 'Best Prop Trading Firms 2025',
     'home.subtitle': 'Compare {{count}} prop firms with exclusive discount codes and real-time pricing.',
-    'home.seo.title': 'Best Prop Trading Firms 2024 - Compare Prices & Discounts | PropFirmMentor',
+    'home.seo.title': 'Best Prop Trading Firms 2025 - Compare Prices & Discounts | PropFirmMentor',
     'home.seo.description': 'Compare the best prop trading firms with exclusive discount codes and real-time pricing. Find your perfect trading challenge with our comprehensive ranking.',
     
     // Firm detail
@@ -197,9 +197,9 @@ const translations = {
     'header.searchPlaceholder': '회사 검색...',
     
     // Home page
-    'home.title': '2024 최고의 프롭 트레이딩 회사',
+    'home.title': '2025 최고의 프롭 트레이딩 회사',
     'home.subtitle': '독점 할인 코드와 실시간 가격으로 {{count}}개의 프롭 회사를 비교하세요.',
-    'home.seo.title': '2024 최고의 프롭 트레이딩 회사 - 가격 및 할인 비교 | PropRank',
+    'home.seo.title': '2025 최고의 프롭 트레이딩 회사 - 가격 및 할인 비교 | PropFirmMentor',
     'home.seo.description': '독점 할인 코드와 실시간 가격으로 최고의 프롭 트레이딩 회사를 비교하세요.',
     
     // Firm detail
@@ -346,9 +346,9 @@ const translations = {
     'header.searchPlaceholder': '会社を検索...',
     
     // Home page
-    'home.title': '2024年最高のプロップトレーディング会社',
+    'home.title': '2025年最高のプロップトレーディング会社',
     'home.subtitle': '独占割引コードとリアルタイム価格で{{count}}のプロップ会社を比較。',
-    'home.seo.title': '2024年最高のプロップトレーディング会社 - 価格と割引の比較 | PropRank',
+    'home.seo.title': '2025年最高のプロップトレーディング会社 - 価格と割引の比較 | PropFirmMentor',
     'home.seo.description': '独占割引コードとリアルタイム価格で最高のプロップトレーディング会社を比較。',
     
     // Firm detail
@@ -442,7 +442,7 @@ const translations = {
     'footer.privacy': 'プライバシーポリシー',
     'footer.terms': '利用規約',
     'footer.disclaimer': '免責事項',
-    'footer.copyright': '© 2024 PropRank. 全著作権所有。',
+    'footer.copyright': '© 2025 PropFirmMentor. 全著作権所有。',
     'footer.operational': 'すべてのシステムが稼働中',
     
     // Listing
@@ -477,9 +477,9 @@ const translations = {
     'header.searchPlaceholder': 'कंपनियां खोजें...',
     
     // Home page
-    'home.title': '2024 के सर्वश्रेष्ठ प्रॉप ट्रेडिंग फर्म',
+    'home.title': '2025 के सर्वश्रेष्ठ प्रॉप ट्रेडिंग फर्म',
     'home.subtitle': 'विशेष छूट कोड और रीयल-टाइम मूल्य निर्धारण के साथ {{count}} प्रॉप फर्मों की तुलना करें।',
-    'home.seo.title': '2024 के सर्वश्रेष्ठ प्रॉप ट्रेडिंग फर्म - मूल्य और छूट तुलना | PropRank',
+    'home.seo.title': '2025 के सर्वश्रेष्ठ प्रॉप ट्रेडिंग फर्म - मूल्य और छूट तुलना | PropFirmMentor',
     'home.seo.description': 'विशेष छूट कोड और रीयल-टाइम मूल्य निर्धारण के साथ सर्वश्रेष्ठ प्रॉप ट्रेडिंग फर्मों की तुलना करें।',
     
     // Firm detail
@@ -573,7 +573,7 @@ const translations = {
     'footer.privacy': 'गोपनीयता नीति',
     'footer.terms': 'सेवा की शर्तें',
     'footer.disclaimer': 'अस्वीकरण',
-    'footer.copyright': '© 2024 PropRank. सभी अधिकार सुरक्षित।',
+    'footer.copyright': '© 2025 PropFirmMentor. सभी अधिकार सुरक्षित।',
     'footer.operational': 'सभी सिस्टम चालू',
     
     // Listing

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "@/components/header";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -29,14 +29,14 @@ interface NewsArticle {
 const newsArticles: NewsArticle[] = [
   {
     id: "1",
-    title: "FTMO Announces New Profit Split Program for 2024",
-    summary: "FTMO introduces enhanced profit-sharing structure with up to 90% splits for top-performing traders, effective Q4 2024.",
+    title: "FTMO Announces New Profit Split Program for 2025",
+    summary: "FTMO introduces enhanced profit-sharing structure with up to 90% splits for top-performing traders, effective Q1 2025.",
     category: "Company Updates",
     author: "PropRank News",
-    publishedAt: "2024-08-15T10:00:00Z",
+    publishedAt: "2025-08-15T10:00:00Z",
     readTime: 3,
     views: 2145,
-    slug: "ftmo-new-profit-split-program-2024",
+    slug: "ftmo-new-profit-split-program-2025",
     tags: ["FTMO", "profit-split", "updates"],
     urgent: true
   },
@@ -46,7 +46,7 @@ const newsArticles: NewsArticle[] = [
     summary: "Leading futures prop firm Topstep announces expansion into European markets with new EU-regulated entity.",
     category: "Market Expansion",
     author: "Market Reporter",
-    publishedAt: "2024-08-14T15:30:00Z",
+    publishedAt: "2025-08-14T15:30:00Z",
     readTime: 4,
     views: 1823,
     slug: "topstep-expands-european-markets",
@@ -59,7 +59,7 @@ const newsArticles: NewsArticle[] = [
     summary: "Financial regulators release updated guidelines for proprietary trading firms, impacting evaluation processes and trader requirements.",
     category: "Regulation",
     author: "Regulatory Expert",
-    publishedAt: "2024-08-13T09:15:00Z",
+    publishedAt: "2025-08-13T09:15:00Z",
     readTime: 6,
     views: 3456,
     slug: "new-regulatory-guidelines-prop-trading",
@@ -68,14 +68,14 @@ const newsArticles: NewsArticle[] = [
   },
   {
     id: "4",
-    title: "Prop Trading Market Grows 25% in Q2 2024",
+    title: "Prop Trading Market Grows 25% in Q2 2025",
     summary: "Industry report shows significant growth in prop trading sector with increased trader participation and firm profitability.",
     category: "Market Analysis",
     author: "Market Analyst",
-    publishedAt: "2024-08-12T14:20:00Z",
+    publishedAt: "2025-08-12T14:20:00Z",
     readTime: 5,
     views: 1967,
-    slug: "prop-trading-market-growth-q2-2024",
+    slug: "prop-trading-market-growth-q2-2025",
     tags: ["market-analysis", "growth", "statistics"],
     urgent: false
   },
@@ -85,7 +85,7 @@ const newsArticles: NewsArticle[] = [
     summary: "The Funded Trader releases dedicated mobile application for iOS and Android, enhancing trader accessibility and functionality.",
     category: "Technology",
     author: "Tech Reporter",
-    publishedAt: "2024-08-11T11:45:00Z",
+    publishedAt: "2025-08-11T11:45:00Z",
     readTime: 3,
     views: 1234,
     slug: "funded-trader-mobile-app-launch",
@@ -98,7 +98,7 @@ const newsArticles: NewsArticle[] = [
     summary: "Industry experts share updated risk management strategies following recent market volatility and prop firm policy changes.",
     category: "Education",
     author: "Risk Management Pro",
-    publishedAt: "2024-08-10T16:00:00Z",
+    publishedAt: "2025-08-10T16:00:00Z",
     readTime: 7,
     views: 2891,
     slug: "risk-management-best-practices-update",
@@ -236,11 +236,13 @@ export default function News() {
   const [selectedCategory, setSelectedCategory] = useState("All");
 
   // Set SEO data
-  setSEO({
-    title: t('news.title', 'Prop Trading News & Updates'),
-    description: t('news.description', 'Stay updated with the latest prop trading news, company updates, and market developments.'),
-    canonical: `/${locale}/news`,
-  });
+  useEffect(() => {
+    setSEO({
+      title: t('news.title') || 'Prop Trading News & Updates',
+      description: t('news.description') || 'Stay updated with the latest prop trading news, company updates, and market developments.',
+      canonical: `/${locale}/news`,
+    });
+  }, [locale, setSEO, t]);
 
   // Filter articles based on search and category
   const filteredArticles = newsArticles.filter(article => {
