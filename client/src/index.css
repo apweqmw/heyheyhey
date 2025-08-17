@@ -163,6 +163,27 @@
   --primary-foreground: hsl(0 0% 100%);
   --secondary: hsl(195.0000 15.3846% 94.9020%);
   --secondary-foreground: hsl(210 25% 7.8431%);
+  
+  /* Dark mode custom colors */
+  --primary-50: hsl(210 100% 10%);
+  --primary-100: hsl(210 100% 15%);
+  --primary-500: hsl(210 95% 60%);
+  --primary-600: hsl(210 95% 55%);
+  --primary-700: hsl(210 100% 50%);
+  
+  --accent-500: hsl(45 100% 60%);
+  --accent-600: hsl(45 100% 55%);
+  
+  --success-100: hsl(142 52% 20%);
+  --success-500: hsl(142 71% 60%);
+  --success-600: hsl(142 71% 55%);
+  --success-800: hsl(142 71% 70%);
+  
+  --warning-100: hsl(35 91% 20%);
+  --warning-500: hsl(35 91% 70%);
+  --warning-600: hsl(35 91% 65%);
+  --warning-700: hsl(35 91% 60%);
+  --warning-800: hsl(35 91% 75%);
   --muted: hsl(0 0% 9.4118%);
   --muted-foreground: hsl(210 3.3898% 46.2745%);
   --accent: hsl(205.7143 70% 7.8431%);

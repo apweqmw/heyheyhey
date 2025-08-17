@@ -257,14 +257,14 @@ export default function FirmDetail() {
                 {getLocalizedRules() ? (
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6" data-testid="trading-rules">
                     {Object.entries(getLocalizedRules()!).map(([key, value]) => (
-                      <div key={key} className="flex justify-between items-center py-2 border-b border-gray-100 last:border-0">
-                        <span className="font-medium text-gray-700">{key}:</span>
-                        <span className="text-gray-900">{String(value)}</span>
+                      <div key={key} className="flex justify-between items-center py-2 border-b border-border last:border-0">
+                        <span className="font-medium text-foreground">{key}:</span>
+                        <span className="text-foreground">{String(value)}</span>
                       </div>
                     ))}
                   </div>
                 ) : (
-                  <div className="text-gray-500">{t('firmDetail.rules.noRules')}</div>
+                  <div className="text-muted-foreground">{t('firmDetail.rules.noRules')}</div>
                 )}
               </CardContent>
             </Card>
@@ -281,32 +281,32 @@ export default function FirmDetail() {
                 <div className="overflow-x-auto">
                   <table className="w-full" data-testid="pricing-table">
                     <thead>
-                      <tr className="border-b border-gray-200">
-                        <th className="text-left py-3 font-semibold text-gray-700">{t('table.accountSize')}</th>
-                        <th className="text-center py-3 font-semibold text-gray-700">{t('table.basePrice')}</th>
-                        <th className="text-center py-3 font-semibold text-gray-700">{t('table.discount')}</th>
-                        <th className="text-center py-3 font-semibold text-gray-700">{t('table.finalPrice')}</th>
+                      <tr className="border-b border-border">
+                        <th className="text-left py-3 font-semibold text-foreground">{t('table.accountSize')}</th>
+                        <th className="text-center py-3 font-semibold text-foreground">{t('table.basePrice')}</th>
+                        <th className="text-center py-3 font-semibold text-foreground">{t('table.discount')}</th>
+                        <th className="text-center py-3 font-semibold text-foreground">{t('table.finalPrice')}</th>
                       </tr>
                     </thead>
                     <tbody>
                       {firm.accounts.map((account) => (
-                        <tr key={account.id} className="border-b border-gray-100 hover:bg-gray-50">
-                          <td className="py-4 font-medium">
+                        <tr key={account.id} className="border-b border-border hover:bg-muted/50 dark:hover:bg-muted/30">
+                          <td className="py-4 font-medium text-foreground">
                             ${account.sizeUsd.toLocaleString()}
                           </td>
-                          <td className="text-center py-4">
+                          <td className="text-center py-4 text-foreground">
                             ${Number(account.basePrice).toLocaleString()}
                           </td>
                           <td className="text-center py-4">
                             {firm.currentDiscount ? (
-                              <span className="inline-flex items-center bg-success-100 text-success-800 px-2 py-1 rounded-full text-sm font-medium">
+                              <span className="inline-flex items-center bg-success-100 dark:bg-success-100/20 text-success-800 dark:text-success-500 px-2 py-1 rounded-full text-sm font-medium">
                                 {firm.currentDiscount}% OFF
                               </span>
                             ) : (
-                              <span className="text-gray-500">-</span>
+                              <span className="text-muted-foreground">-</span>
                             )}
                           </td>
-                          <td className="text-center py-4 font-bold text-primary-600">
+                          <td className="text-center py-4 font-bold text-primary-600 dark:text-primary-500">
                             ${Math.round(account.currentPrice || Number(account.basePrice)).toLocaleString()}
                           </td>
                         </tr>
@@ -327,12 +327,12 @@ export default function FirmDetail() {
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  <div className="bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-lg p-4">
-                    <h4 className="font-semibold text-green-800 mb-2">
+                  <div className="bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-950/50 dark:to-emerald-950/50 border border-green-200 dark:border-green-800 rounded-lg p-4">
+                    <h4 className="font-semibold text-green-800 dark:text-green-200 mb-2">
                       <i className="fas fa-check-circle mr-2"></i>
                       What is a Funded Account?
                     </h4>
-                    <p className="text-green-700 text-sm leading-relaxed">
+                    <p className="text-green-700 dark:text-green-300 text-sm leading-relaxed">
                       After passing the evaluation challenges, you receive a funded account with {firm.name}'s capital. 
                       You can trade with larger amounts without risking your own money, keeping {firm.payoutSplit?.split('/')[0] || '80'}% of profits made.
                     </p>
@@ -341,7 +341,7 @@ export default function FirmDetail() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="border border-border rounded-lg p-4">
                       <div className="flex items-center mb-3">
-                        <i className="fas fa-chart-line text-blue-500 mr-2"></i>
+                        <i className="fas fa-chart-line text-blue-500 dark:text-blue-400 mr-2"></i>
                         <h5 className="font-semibold text-foreground">Scaling Process</h5>
                       </div>
                       <p className="text-sm text-muted-foreground mb-3">
@@ -350,18 +350,18 @@ export default function FirmDetail() {
                       <div className="text-sm">
                         <div className="flex justify-between py-1">
                           <span className="text-muted-foreground">Max Scale:</span>
-                          <span className="font-medium">Up to $2M+</span>
+                          <span className="font-medium text-foreground">Up to $2M+</span>
                         </div>
                         <div className="flex justify-between py-1">
                           <span className="text-muted-foreground">Requirements:</span>
-                          <span className="font-medium">Consistent profits</span>
+                          <span className="font-medium text-foreground">Consistent profits</span>
                         </div>
                       </div>
                     </div>
 
                     <div className="border border-border rounded-lg p-4">
                       <div className="flex items-center mb-3">
-                        <i className="fas fa-hand-holding-usd text-green-500 mr-2"></i>
+                        <i className="fas fa-hand-holding-usd text-green-500 dark:text-green-400 mr-2"></i>
                         <h5 className="font-semibold text-foreground">Profit Split</h5>
                       </div>
                       <p className="text-sm text-muted-foreground mb-3">
@@ -370,22 +370,22 @@ export default function FirmDetail() {
                       <div className="text-sm">
                         <div className="flex justify-between py-1">
                           <span className="text-muted-foreground">Your Share:</span>
-                          <span className="font-bold text-green-600">{firm.payoutSplit?.split('/')[0] || '80'}%</span>
+                          <span className="font-bold text-green-600 dark:text-green-400">{firm.payoutSplit?.split('/')[0] || '80'}%</span>
                         </div>
                         <div className="flex justify-between py-1">
                           <span className="text-muted-foreground">First Payout:</span>
-                          <span className="font-medium">{firm.earliestPayoutDays}+ days</span>
+                          <span className="font-medium text-foreground">{firm.earliestPayoutDays}+ days</span>
                         </div>
                       </div>
                     </div>
                   </div>
 
-                  <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                    <h5 className="font-semibold text-blue-800 mb-2">
+                  <div className="bg-blue-50 dark:bg-blue-950/50 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+                    <h5 className="font-semibold text-blue-800 dark:text-blue-200 mb-2">
                       <i className="fas fa-lightbulb mr-2"></i>
                       How to Get Funded
                     </h5>
-                    <ol className="text-sm text-blue-700 space-y-1 ml-4">
+                    <ol className="text-sm text-blue-700 dark:text-blue-300 space-y-1 ml-4">
                       <li>1. Purchase an evaluation challenge account</li>
                       <li>2. Pass the {firm.evaluationSteps}-step evaluation process</li>
                       <li>3. Demonstrate consistent, profitable trading</li>
@@ -413,79 +413,79 @@ export default function FirmDetail() {
 
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     {/* Evaluation Phase */}
-                    <div className="border border-orange-200 bg-orange-50 rounded-lg p-4">
+                    <div className="border border-orange-200 dark:border-orange-800 bg-orange-50 dark:bg-orange-950/50 rounded-lg p-4">
                       <div className="flex items-center mb-3">
-                        <i className="fas fa-clipboard-check text-orange-600 mr-2"></i>
-                        <h5 className="font-semibold text-orange-800">Evaluation Phase</h5>
+                        <i className="fas fa-clipboard-check text-orange-600 dark:text-orange-400 mr-2"></i>
+                        <h5 className="font-semibold text-orange-800 dark:text-orange-200">Evaluation Phase</h5>
                       </div>
                       
                       <div className="space-y-3 text-sm">
                         <div className="flex items-start">
-                          <i className="fas fa-target text-orange-600 mr-2 mt-0.5 text-xs"></i>
+                          <i className="fas fa-target text-orange-600 dark:text-orange-400 mr-2 mt-0.5 text-xs"></i>
                           <div>
-                            <div className="font-medium text-orange-800">Profit Target:</div>
-                            <div className="text-orange-700">{firm.profitTarget || '10%'} in {firm.minTradingDays || 10}+ trading days</div>
+                            <div className="font-medium text-orange-800 dark:text-orange-200">Profit Target:</div>
+                            <div className="text-orange-700 dark:text-orange-300">{firm.profitTarget || '10%'} in {firm.minTradingDays || 10}+ trading days</div>
                           </div>
                         </div>
                         
                         <div className="flex items-start">
-                          <i className="fas fa-shield-alt text-orange-600 mr-2 mt-0.5 text-xs"></i>
+                          <i className="fas fa-shield-alt text-orange-600 dark:text-orange-400 mr-2 mt-0.5 text-xs"></i>
                           <div>
-                            <div className="font-medium text-orange-800">Risk Limits:</div>
-                            <div className="text-orange-700">
+                            <div className="font-medium text-orange-800 dark:text-orange-200">Risk Limits:</div>
+                            <div className="text-orange-700 dark:text-orange-300">
                               Daily: {firm.maxDailyLoss || '5%'} | Total: {firm.maxTotalLoss || '10%'}
                             </div>
                           </div>
                         </div>
 
                         <div className="flex items-start">
-                          <i className="fas fa-dollar-sign text-orange-600 mr-2 mt-0.5 text-xs"></i>
+                          <i className="fas fa-dollar-sign text-orange-600 dark:text-orange-400 mr-2 mt-0.5 text-xs"></i>
                           <div>
-                            <div className="font-medium text-orange-800">Cost:</div>
-                            <div className="text-orange-700">One-time evaluation fee + potential activation fee</div>
+                            <div className="font-medium text-orange-800 dark:text-orange-200">Cost:</div>
+                            <div className="text-orange-700 dark:text-orange-300">One-time evaluation fee + potential activation fee</div>
                           </div>
                         </div>
                       </div>
                     </div>
 
                     {/* Live Funded Account */}
-                    <div className="border border-green-200 bg-green-50 rounded-lg p-4">
+                    <div className="border border-green-200 dark:border-green-800 bg-green-50 dark:bg-green-950/50 rounded-lg p-4">
                       <div className="flex items-center mb-3">
-                        <i className="fas fa-trophy text-green-600 mr-2"></i>
-                        <h5 className="font-semibold text-green-800">Live Funded Account</h5>
+                        <i className="fas fa-trophy text-green-600 dark:text-green-400 mr-2"></i>
+                        <h5 className="font-semibold text-green-800 dark:text-green-200">Live Funded Account</h5>
                       </div>
                       
                       <div className="space-y-3 text-sm">
                         <div className="flex items-start">
-                          <i className="fas fa-money-bill-wave text-green-600 mr-2 mt-0.5 text-xs"></i>
+                          <i className="fas fa-money-bill-wave text-green-600 dark:text-green-400 mr-2 mt-0.5 text-xs"></i>
                           <div>
-                            <div className="font-medium text-green-800">Real Capital:</div>
-                            <div className="text-green-700">Trade with {firm.name}'s money, not yours</div>
+                            <div className="font-medium text-green-800 dark:text-green-200">Real Capital:</div>
+                            <div className="text-green-700 dark:text-green-300">Trade with {firm.name}'s money, not yours</div>
                           </div>
                         </div>
                         
                         <div className="flex items-start">
-                          <i className="fas fa-percentage text-green-600 mr-2 mt-0.5 text-xs"></i>
+                          <i className="fas fa-percentage text-green-600 dark:text-green-400 mr-2 mt-0.5 text-xs"></i>
                           <div>
-                            <div className="font-medium text-green-800">Profit Share:</div>
-                            <div className="text-green-700">Keep {firm.payoutSplit?.split('/')[0] || '80'}% of all profits made</div>
+                            <div className="font-medium text-green-800 dark:text-green-200">Profit Share:</div>
+                            <div className="text-green-700 dark:text-green-300">Keep {firm.payoutSplit?.split('/')[0] || '80'}% of all profits made</div>
                           </div>
                         </div>
 
                         <div className="flex items-start">
-                          <i className="fas fa-calendar-alt text-green-600 mr-2 mt-0.5 text-xs"></i>
+                          <i className="fas fa-calendar-alt text-green-600 dark:text-green-400 mr-2 mt-0.5 text-xs"></i>
                           <div>
-                            <div className="font-medium text-green-800">Payouts:</div>
-                            <div className="text-green-700">Regular payouts starting after {firm.earliestPayoutDays} days</div>
+                            <div className="font-medium text-green-800 dark:text-green-200">Payouts:</div>
+                            <div className="text-green-700 dark:text-green-300">Regular payouts starting after {firm.earliestPayoutDays} days</div>
                           </div>
                         </div>
 
                         {firm.activationFee && Number(firm.activationFee) > 0 && (
                           <div className="flex items-start">
-                            <i className="fas fa-key text-green-600 mr-2 mt-0.5 text-xs"></i>
+                            <i className="fas fa-key text-green-600 dark:text-green-400 mr-2 mt-0.5 text-xs"></i>
                             <div>
-                              <div className="font-medium text-green-800">Activation:</div>
-                              <div className="text-green-700">${Number(firm.activationFee).toLocaleString()} one-time fee</div>
+                              <div className="font-medium text-green-800 dark:text-green-200">Activation:</div>
+                              <div className="text-green-700 dark:text-green-300">${Number(firm.activationFee).toLocaleString()} one-time fee</div>
                             </div>
                           </div>
                         )}
@@ -494,12 +494,12 @@ export default function FirmDetail() {
                   </div>
 
                   {firm.consistencyRule && (
-                    <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                    <div className="bg-yellow-50 dark:bg-yellow-950/50 border border-yellow-200 dark:border-yellow-800 rounded-lg p-4">
                       <div className="flex items-start">
-                        <i className="fas fa-balance-scale text-yellow-600 mr-2 mt-0.5"></i>
+                        <i className="fas fa-balance-scale text-yellow-600 dark:text-yellow-400 mr-2 mt-0.5"></i>
                         <div>
-                          <div className="font-semibold text-yellow-800 mb-1">Consistency Rule:</div>
-                          <p className="text-sm text-yellow-700">{firm.consistencyRule}</p>
+                          <div className="font-semibold text-yellow-800 dark:text-yellow-200 mb-1">Consistency Rule:</div>
+                          <p className="text-sm text-yellow-700 dark:text-yellow-300">{firm.consistencyRule}</p>
                         </div>
                       </div>
                     </div>
@@ -512,9 +512,9 @@ export default function FirmDetail() {
           {/* Sidebar */}
           <div className="space-y-6">
             {/* Referral Section */}
-            <Card className="border-primary-200 bg-primary-50">
+            <Card className="border-primary-200 dark:border-primary-800 bg-primary-50 dark:bg-primary-950/50">
               <CardHeader>
-                <CardTitle className="text-primary-700">
+                <CardTitle className="text-primary-700 dark:text-primary-300">
                   <i className="fas fa-gift mr-2"></i>
                   {t('firmDetail.referral.title')}
                 </CardTitle>
@@ -523,11 +523,11 @@ export default function FirmDetail() {
                 {/* Coupon Code */}
                 {(activePromotion?.couponCode || firm.couponCode) && (
                   <div>
-                    <div className="text-sm font-medium text-gray-700 mb-2">
+                    <div className="text-sm font-medium text-foreground mb-2">
                       {t('firmDetail.referral.couponCode')}:
                     </div>
                     <div className="flex items-center gap-2">
-                      <code className="flex-1 bg-white px-3 py-2 rounded border font-mono text-sm">
+                      <code className="flex-1 bg-background dark:bg-muted px-3 py-2 rounded border border-border font-mono text-sm text-foreground">
                         {activePromotion?.couponCode || firm.couponCode}
                       </code>
                       <Button
@@ -574,7 +574,7 @@ export default function FirmDetail() {
                   ))}
                 </div>
 
-                <div className="text-xs text-gray-500 text-center">
+                <div className="text-xs text-muted-foreground text-center">
                   {t('firmDetail.referral.disclosure')}
                 </div>
               </CardContent>
@@ -587,8 +587,8 @@ export default function FirmDetail() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="flex justify-between items-center">
-                  <span className="text-gray-600">{t('firmDetail.stats.totalSavings')}:</span>
-                  <span className="font-bold text-success-600" data-testid="total-savings">
+                  <span className="text-muted-foreground">{t('firmDetail.stats.totalSavings')}:</span>
+                  <span className="font-bold text-success-600 dark:text-success-500" data-testid="total-savings">
                     ${firm.accounts.reduce((acc, account) => {
                       const savings = Number(account.basePrice) - (account.currentPrice || Number(account.basePrice));
                       return acc + savings;
@@ -596,14 +596,14 @@ export default function FirmDetail() {
                   </span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-gray-600">{t('firmDetail.stats.avgDiscount')}:</span>
-                  <span className="font-bold text-primary-600">
+                  <span className="text-muted-foreground">{t('firmDetail.stats.avgDiscount')}:</span>
+                  <span className="font-bold text-primary-600 dark:text-primary-500">
                     {firm.currentDiscount || 0}%
                   </span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-gray-600">{t('firmDetail.stats.accountSizes')}:</span>
-                  <span className="font-bold text-gray-900">
+                  <span className="text-muted-foreground">{t('firmDetail.stats.accountSizes')}:</span>
+                  <span className="font-bold text-foreground">
                     {firm.accounts.length}
                   </span>
                 </div>
