@@ -59,6 +59,26 @@ The system includes integration points for external data sources:
 - **Analytics**: UTM parameter tracking for affiliate conversions
 - **SEO Tools**: Structured data, meta tags, and sitemap generation
 
+### Content Management System
+**Guide and News Detail Pages (January 2025)**:
+- Created comprehensive guide detail pages (`/[locale]/guides/[slug]`)
+- Added news article detail pages (`/[locale]/news/[slug]`)
+- Rich content with proper formatting, metadata, and navigation
+- Sample content includes prop trading fundamentals, risk management strategies
+- News articles cover industry updates, regulations, and firm announcements
+- Proper SEO optimization and responsive design
+
+**Navigation Enhancement**:
+- Fixed navigation highlighting for reviews, guides, and news pages
+- Navigation now properly highlights active section using `startsWith()` matching
+- Improved user experience with clear visual indication of current page
+
+**Dark Mode Improvements**:
+- Fixed critical dark mode styling issues on firm detail pages
+- Replaced all hardcoded gray colors with semantic Tailwind classes
+- Added proper dark mode variants for all colored backgrounds and text
+- Enhanced readability and contrast in dark theme
+
 ### Review System Architecture
 The platform includes a comprehensive review system that integrates authentic Trustpilot data:
 
@@ -68,15 +88,10 @@ The platform includes a comprehensive review system that integrates authentic Tr
 - Shows summary statistics and recent review previews
 - Uses authentic data: FTMO (4.8★, 25,710 reviews), Topstep (4.3★, 10,928 reviews), TopstepFX (4.9★, 467 reviews)
 
-**Individual Firm Reviews** (`/[locale]/reviews/[slug]`):
-- Detailed review page for each firm with filtering and sorting
-- Star rating distribution charts
-- Business reply functionality
-- Integration with firm detail pages via navigation buttons
-
 **Database Schema Extensions**:
 - Added `trustpilotUrl` and `trustpilotBusinessId` fields to firms table
 - Support for storing authentic review metadata and ratings
+- Removed individual firm review functionality in favor of Trustpilot integration
 
 ### Performance Optimizations
 - **Query Optimization**: Efficient database queries with proper indexing

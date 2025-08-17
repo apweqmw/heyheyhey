@@ -10,7 +10,9 @@ import Home from "@/pages/home";
 import FirmDetail from "@/pages/firm-detail";
 import ReviewsOverview from "@/pages/reviews-overview";
 import Guides from "@/pages/guides";
+import GuideDetail from "./pages/guide-detail";
 import News from "@/pages/news";
+import NewsDetail from "./pages/news-detail";
 import Admin from "@/pages/admin";
 import NotFound from "@/pages/not-found";
 
@@ -21,7 +23,9 @@ function Router() {
       <Route path="/:locale" component={Home} />
       <Route path="/:locale/firms/:slug" component={FirmDetail} />
       <Route path="/:locale/reviews" component={ReviewsOverview} />
+      <Route path="/:locale/guides/:slug" component={GuideDetail} />
       <Route path="/:locale/guides" component={Guides} />
+      <Route path="/:locale/news/:slug" component={NewsDetail} />
       <Route path="/:locale/news" component={News} />
       <Route path="/admin" component={Admin} />
       <Route component={NotFound} />

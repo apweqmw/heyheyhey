@@ -30,9 +30,9 @@ export default function Header() {
 
   const navigation = [
     { name: t('nav.rankings'), href: `/${locale}`, current: location === `/${locale}` || location === '/' },
-    { name: t('nav.reviews'), href: `/${locale}/reviews`, current: false },
-    { name: t('nav.guides'), href: `/${locale}/guides`, current: false },
-    { name: t('nav.news'), href: `/${locale}/news`, current: false },
+    { name: t('nav.reviews'), href: `/${locale}/reviews`, current: location.startsWith(`/${locale}/reviews`) },
+    { name: t('nav.guides'), href: `/${locale}/guides`, current: location.startsWith(`/${locale}/guides`) },
+    { name: t('nav.news'), href: `/${locale}/news`, current: location.startsWith(`/${locale}/news`) },
   ];
 
   // Fetch firms for search
