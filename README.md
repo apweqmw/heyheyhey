@@ -41,7 +41,6 @@ A comprehensive prop trading firm ranking and comparison website that helps trad
 
 ### Infrastructure
 - **PostgreSQL Database** (Neon serverless)
-- **Replit Deployments** ready
 - **Environment Variables** for configuration
 
 ## 📦 Installation
@@ -162,12 +161,9 @@ Translations are managed in `client/src/lib/i18n.tsx`. To add new languages:
 - `POST /api/sync/promotions` - Sync promotional offers
 
 ## 🌐 Deployment
-
-The application is configured for Replit Deployments:
-
 1. **Environment Setup**: Ensure all environment variables are configured
 2. **Database**: Verify PostgreSQL connection and schema
-3. **Deploy**: Use Replit's deploy button or CI/CD integration
+3. **Deploy**: Npm run the built pacakge in your server
 
 ### Production Considerations
 - Enable HTTPS for secure data transmission
@@ -215,7 +211,7 @@ The application is configured for Replit Deployments:
 ## 🆘 Support
 
 For questions or issues:
-1. Check existing documentation in `replit.md`
+1. Check existing documentation in `Readme.md`
 2. Review console logs for debugging information
 3. Test across multiple browsers and devices
 4. Verify database connectivity and schema
