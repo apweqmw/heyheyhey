@@ -43,31 +43,23 @@ export default function Footer() {
             <h4 className="font-semibold mb-4">{t('footer.navigation')}</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href={`/${locale}`}>
-                  <a className="text-gray-400 hover:text-white transition-colors">
-                    {t('nav.rankings')}
-                  </a>
+                <Link href={`/${locale}`} className="text-gray-400 hover:text-white transition-colors">
+                  {t('nav.rankings')}
                 </Link>
               </li>
               <li>
-                <Link href={`/${locale}/reviews`}>
-                  <a className="text-gray-400 hover:text-white transition-colors">
-                    {t('nav.reviews')}
-                  </a>
+                <Link href={`/${locale}/reviews`} className="text-gray-400 hover:text-white transition-colors">
+                  {t('nav.reviews')}
                 </Link>
               </li>
               <li>
-                <Link href={`/${locale}/guides`}>
-                  <a className="text-gray-400 hover:text-white transition-colors">
-                    {t('nav.guides')}
-                  </a>
+                <Link href={`/${locale}/guides`} className="text-gray-400 hover:text-white transition-colors">
+                  {t('nav.guides')}
                 </Link>
               </li>
               <li>
-                <Link href={`/${locale}/news`}>
-                  <a className="text-gray-400 hover:text-white transition-colors">
-                    {t('nav.news')}
-                  </a>
+                <Link href={`/${locale}/news`} className="text-gray-400 hover:text-white transition-colors">
+                  {t('nav.news')}
                 </Link>
               </li>
             </ul>
