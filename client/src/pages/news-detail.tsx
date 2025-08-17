@@ -33,10 +33,10 @@ export default function NewsDetail() {
 
   // Mock news data - in a real app this would come from an API
   const mockNews: Record<string, NewsArticle> = {
-    "ftmo-scaling-update": {
+    "ftmo-new-profit-split-program-2025": {
       id: "1",
-      slug: "ftmo-scaling-update",
-      title: "FTMO Introduces New Account Scaling Program for 2025",
+      slug: "ftmo-new-profit-split-program-2025",
+      title: "FTMO Announces New Profit Split Program for 2025",
       summary: "FTMO has announced major changes to their account scaling program, offering faster progression and higher profit splits for consistent traders.",
       content: `# FTMO Launches Enhanced Scaling Program
 
@@ -159,11 +159,11 @@ The prop trading industry continues to evolve rapidly, and this latest developme
       views: 15420,
       urgent: false
     },
-    "cftc-regulations-2025": {
+    "new-regulatory-guidelines-prop-trading": {
       id: "2",
-      slug: "cftc-regulations-2025", 
-      title: "CFTC Announces New Regulations for Prop Trading Firms",
-      summary: "The Commodity Futures Trading Commission has released new regulatory guidelines that will impact how prop trading firms operate in 2025.",
+      slug: "new-regulatory-guidelines-prop-trading", 
+      title: "New Regulatory Guidelines for Prop Trading Firms",
+      summary: "Financial regulators release updated guidelines for proprietary trading firms, impacting evaluation processes and trader requirements.",
       content: `# CFTC Issues New Prop Trading Regulations for 2025
 
 The Commodity Futures Trading Commission (CFTC) has announced comprehensive new regulations for proprietary trading firms, set to take effect in Q2 2025. These regulations aim to increase transparency, protect traders, and ensure fair market practices.
@@ -302,11 +302,287 @@ Firms that embrace these changes and view them as an opportunity to demonstrate 
 
 The next few months will be critical as firms prepare for compliance and traders evaluate their options in this evolving regulatory landscape.`,
       category: "Regulation",
-      author: "Legal Team",
-      publishedAt: "2025-01-14T14:30:00Z",
-      readTime: 12,
-      views: 28650,
+      author: "Regulatory Expert",
+      publishedAt: "2025-08-13T09:15:00Z",
+      readTime: 6,
+      views: 3456,
       urgent: true
+    },
+    "topstep-expands-european-markets": {
+      id: "3",
+      slug: "topstep-expands-european-markets",
+      title: "Topstep Expands to European Markets",
+      summary: "Leading futures prop firm Topstep announces expansion into European markets with new EU-regulated entity.",
+      content: `# Topstep Announces Major European Expansion
+
+Topstep, one of the world's leading futures proprietary trading firms, has announced its official expansion into European markets through the establishment of a new EU-regulated entity, Topstep Europe Ltd.
+
+## Strategic Expansion Details
+
+### New European Entity
+- **Regulatory Status**: Fully authorized by EU financial authorities
+- **Base of Operations**: London and Frankfurt offices
+- **Target Markets**: UK, Germany, France, Netherlands, and Nordic countries
+- **Local Currency Support**: EUR, GBP trading alongside USD
+
+### Enhanced Product Offerings
+**European-Focused Instruments**:
+- FTSE 100 and DAX index futures
+- European bond futures (Bund, BTP)
+- Energy futures (ICE Brent, TTF Gas)
+- FX futures with EUR pairs
+
+**Localized Services**:
+- European market hours optimization
+- Local customer support in multiple languages
+- Compliance with MiFID II and GDPR requirements
+- Regional payment methods integration
+
+## Market Impact and Opportunities
+
+### For European Traders
+The expansion provides European traders with:
+- **Reduced Latency**: Local servers and infrastructure
+- **Regulatory Protection**: EU investor protection frameworks
+- **Currency Efficiency**: Native EUR trading reduces conversion costs
+- **Local Support**: Business hours aligned with European markets
+
+### Competitive Landscape
+This move intensifies competition in the European prop trading space:
+- Direct competition with established European firms
+- Pressure on other US firms to expand internationally
+- Innovation in evaluation processes and trader support
+- Enhanced standards across the industry
+
+## Implementation Timeline
+
+### Phase 1 (Q3 2025): Soft Launch
+- Limited beta program for selected European traders
+- Core futures instruments availability
+- Basic support infrastructure establishment
+
+### Phase 2 (Q4 2025): Full Launch
+- Complete product suite rollout
+- Marketing and customer acquisition campaigns
+- Partnership establishment with European brokers
+- Educational content localization
+
+### Phase 3 (Q1 2026): Optimization
+- Advanced features and tools deployment
+- Mobile application European optimization
+- Institutional partnerships development
+- Market maker relationships establishment
+
+## Executive Commentary
+
+"Europe represents a massive opportunity for growth," said CEO Michael Patak. "European traders have been underserved by proper prop trading opportunities, and we're excited to bring our proven evaluation model and trader development programs to this market."
+
+Head of International Expansion Sarah Williams added: "Our research shows strong demand for legitimate prop trading opportunities in Europe. We've invested significantly in ensuring full regulatory compliance while maintaining the trader-friendly approach that made us successful in the US."
+
+## Regulatory Considerations
+
+### Compliance Framework
+- **License Type**: Investment services license under MiFID II
+- **Capital Requirements**: €5M initial regulatory capital
+- **Audit Requirements**: Annual third-party compliance reviews
+- **Reporting Standards**: Enhanced transaction reporting to regulators
+
+### Trader Protections
+- Client money segregation in Tier 1 European banks
+- Investor compensation scheme participation
+- Clear complaint handling procedures
+- Transparent fee and evaluation criteria disclosure
+
+## Industry Analysis
+
+Market analysts view this expansion positively:
+
+"Topstep's European expansion validates the global demand for prop trading services," notes fintech analyst Dr. Emma Richardson. "Their proven track record and substantial regulatory investment should position them well against local competitors."
+
+European trading education expert Marco Villareal commented: "This brings much-needed legitimacy and professional standards to the European prop trading space. Traders will benefit from increased competition and improved service standards."
+
+## Future Implications
+
+### For the Industry
+- Accelerated globalization of prop trading services
+- Increased regulatory scrutiny and standardization
+- Enhanced trader mobility between regions
+- Technology and service innovation pressure
+
+### For Traders
+- More opportunities and firm choices
+- Better terms and conditions through competition
+- Improved educational and support resources
+- Enhanced career development pathways
+
+## Conclusion
+
+Topstep's European expansion marks a significant milestone in the globalization of prop trading. By establishing a fully regulated European presence, they're not only accessing new markets but also raising industry standards.
+
+For European traders, this expansion means access to proven evaluation systems, professional development programs, and the opportunity to trade with substantial capital backing. The move is expected to catalyze further international expansion by other major prop trading firms.
+
+The success of this expansion will likely determine the pace of similar moves by competitors and shape the future landscape of global prop trading.`,
+      category: "Market Expansion",
+      author: "Market Reporter",
+      publishedAt: "2025-08-14T15:30:00Z",
+      readTime: 4,
+      views: 1823,
+      urgent: false
+    },
+    "prop-trading-market-growth-q2-2025": {
+      id: "4",
+      slug: "prop-trading-market-growth-q2-2025",
+      title: "Prop Trading Market Grows 25% in Q2 2025",
+      summary: "Industry report shows significant growth in prop trading sector with increased trader participation and firm profitability.",
+      content: `# Prop Trading Market Shows Record Growth in Q2 2025
+
+The proprietary trading industry has reported exceptional growth in Q2 2025, with market expansion reaching 25% compared to the same period last year, according to the latest industry report from PropTech Analytics.
+
+## Key Growth Metrics
+
+### Market Size and Participation
+- **Total Market Value**: $8.2 billion (up from $6.6 billion in Q2 2024)
+- **Active Traders**: 485,000 (25% increase year-over-year)
+- **Funded Accounts**: 125,000 (40% increase)
+- **Average Account Size**: $165,000 (up 15%)
+
+### Firm Performance
+- **Number of Active Firms**: 180+ worldwide
+- **New Firm Launches**: 25 in Q2 2025 alone
+- **Average Firm Revenue Growth**: 22%
+- **Trader Success Rate**: 18% (up from 14% in 2024)
+
+## Driving Factors Behind Growth
+
+### Technology Advancement
+**Trading Infrastructure**:
+- Cloud-based trading platforms reducing latency
+- AI-powered risk management systems
+- Mobile trading application proliferation
+- Real-time analytics and reporting tools
+
+**Evaluation Innovation**:
+- Shorter evaluation periods (average 30 days vs 45 days)
+- More flexible trading rules and schedules
+- Instant funding for exceptional performers
+- Improved educational and mentoring programs
+
+### Market Accessibility
+**Reduced Barriers to Entry**:
+- Lower evaluation fees (average 15% reduction)
+- More payment plan options and flexibility
+- Multiple account size options starting from $10K
+- Beginner-friendly evaluation criteria
+
+**Global Expansion**:
+- European market penetration increasing rapidly
+- Asian market presence growing (particularly Singapore, Hong Kong)
+- Latin American firm launches accelerating
+- Regulatory frameworks becoming more favorable
+
+## Sector Analysis by Region
+
+### North America (60% of global market)
+- **Growth Rate**: 20% year-over-year
+- **Leading Firms**: FTMO, Topstep, The Funded Trader
+- **Key Trend**: Increased institutional backing and legitimacy
+
+### Europe (25% of global market)
+- **Growth Rate**: 35% year-over-year
+- **Regulatory Environment**: Increasingly supportive with MiFID II adaptations
+- **Key Trend**: Local firm establishment and US firm expansion
+
+### Asia-Pacific (12% of global market)
+- **Growth Rate**: 45% year-over-year
+- **Emerging Markets**: Singapore, Australia, Hong Kong leading
+- **Key Trend**: Technology-first approach and mobile-native platforms
+
+### Other Regions (3% of global market)
+- **Growth Rate**: 30% year-over-year
+- **Focus Areas**: Latin America and Middle East
+- **Key Trend**: Localized service offerings and currency support
+
+## Trader Success Trends
+
+### Improved Performance Metrics
+- **Average Profitability**: Successful traders earning 12% monthly returns
+- **Risk Management**: Better adherence to drawdown limits
+- **Consistency**: 65% of funded traders maintaining profitability for 6+ months
+- **Scaling Success**: 35% of traders successfully scaling to larger accounts
+
+### Demographics and Behavior
+**Age Distribution**:
+- 18-25 years: 28% (highest growth segment)
+- 26-35 years: 45% (largest segment)
+- 36-45 years: 20%
+- 45+ years: 7%
+
+**Educational Background**:
+- Finance/Economics: 35%
+- Technology/Engineering: 25%
+- Self-taught traders: 40%
+
+## Industry Challenges and Solutions
+
+### Ongoing Challenges
+- **Regulatory Uncertainty**: Varying rules across jurisdictions
+- **Market Saturation**: Increased competition among firms
+- **Trader Education**: Need for better preparation and realistic expectations
+- **Risk Management**: Balancing opportunity with prudent risk controls
+
+### Industry Solutions
+- **Self-Regulation**: Industry associations developing standards
+- **Technology Investment**: Advanced risk management and trader analytics
+- **Education Initiatives**: Comprehensive training programs and resources
+- **Transparency**: Clear communication of rules, fees, and expectations
+
+## Future Outlook
+
+### 2025 Projections
+- **Market Size**: Expected to reach $10 billion by year-end
+- **Trader Population**: Projected 600,000 active traders
+- **Geographic Expansion**: Continued growth in emerging markets
+- **Technology Integration**: AI and machine learning advancement
+
+### Long-term Trends (2026-2028)
+- **Institutional Integration**: Prop firms becoming part of larger financial ecosystems
+- **Regulatory Harmonization**: More consistent international standards
+- **Professional Development**: Career pathways from prop trading to institutional roles
+- **Technology Evolution**: VR trading environments and advanced simulation
+
+## Expert Commentary
+
+Dr. James Mitchell, Director of Financial Markets Research at TradeTech Institute, notes: "The 25% growth rate reflects the maturation of prop trading from a niche activity to a legitimate career path. Improved technology, better risk management, and professional standards are driving this expansion."
+
+Maria Santos, former hedge fund manager and now prop trading consultant, comments: "What we're seeing is the democratization of professional trading. Prop firms are providing opportunities that were previously only available to institutional traders."
+
+## Investment and Funding
+
+### Firm Capitalization
+- **Total Industry Capital**: $15.2 billion under management
+- **Average Firm Capital**: $85 million
+- **New Investment**: $2.1 billion in external funding raised in Q2
+- **Valuation Growth**: Average firm valuations up 30%
+
+### Technology Investment
+- **R&D Spending**: 15% of revenue (industry average)
+- **Focus Areas**: Risk management, trader analytics, platform development
+- **Partnerships**: Increased collaboration with fintech companies
+- **Innovation Labs**: 40% of major firms establishing dedicated innovation teams
+
+## Conclusion
+
+The prop trading industry's 25% growth in Q2 2025 demonstrates its evolution from a niche market to a significant sector within financial services. This growth is driven by technological advancement, improved accessibility, and growing global recognition of prop trading as a legitimate career path.
+
+As the industry continues to mature, we can expect further professionalization, technological innovation, and geographic expansion. The challenge will be maintaining this growth while ensuring proper risk management and trader protection standards.
+
+For aspiring traders, these trends indicate expanding opportunities, better tools and support, and clearer pathways to success in proprietary trading careers.`,
+      category: "Market Analysis",
+      author: "Market Analyst",
+      publishedAt: "2025-08-12T14:20:00Z",
+      readTime: 5,
+      views: 1967,
+      urgent: false
     }
   };
 

@@ -32,11 +32,11 @@ export default function GuideDetail() {
 
   // Mock guide data - in a real app this would come from an API
   const mockGuides: Record<string, Guide> = {
-    "prop-trading-fundamentals": {
+    "complete-guide-prop-trading-firms": {
       id: "1",
-      slug: "prop-trading-fundamentals",
-      title: "Prop Trading Fundamentals: Complete Guide for Beginners",
-      description: "Learn the essential concepts and strategies needed to succeed in proprietary trading with this comprehensive beginner's guide.",
+      slug: "complete-guide-prop-trading-firms",
+      title: "Complete Guide to Prop Trading Firms",
+      description: "Everything you need to know about prop trading firms, how they work, and how to choose the right one for your trading style.",
       content: `# Introduction to Prop Trading
 
 Proprietary trading, commonly known as "prop trading," is a form of trading where a firm trades financial instruments using its own capital rather than client funds. This guide will walk you through everything you need to know to get started.
@@ -123,11 +123,11 @@ Remember: the key to prop trading success is not just making profits, but making
       tags: ["Fundamentals", "Beginner", "Strategy", "Risk Management"],
       publishedAt: "2025-01-15T00:00:00Z"
     },
-    "risk-management-strategies": {
+    "risk-management-prop-traders": {
       id: "2", 
-      slug: "risk-management-strategies",
-      title: "Advanced Risk Management Strategies for Prop Traders",
-      description: "Master the art of risk management with proven strategies used by professional prop traders to protect capital and maximize returns.",
+      slug: "risk-management-prop-traders",
+      title: "Risk Management for Prop Traders",
+      description: "Essential risk management techniques to protect your funded account and maintain consistent profitability.",
       content: `# Advanced Risk Management for Prop Traders
 
 Risk management is the cornerstone of successful prop trading. This guide covers advanced techniques used by professional traders to protect capital while maximizing profit potential.
@@ -222,12 +222,12 @@ Spread risk across different:
 ## Conclusion
 
 Effective risk management is what separates successful prop traders from those who blow accounts. Master these techniques and make them second nature - your trading career depends on it.`,
-      difficulty: "Advanced",
-      author: "Sarah Chen, CFA",
+      difficulty: "Intermediate",
+      author: "Risk Management Pro",
       readTime: 18,
-      rating: 4.9,
-      tags: ["Risk Management", "Advanced", "Psychology", "Portfolio Management"],
-      publishedAt: "2025-01-10T00:00:00Z"
+      rating: 4.7,
+      tags: ["risk-management", "psychology", "money-management"],
+      publishedAt: "2025-08-10T00:00:00Z"
     }
   };
 
