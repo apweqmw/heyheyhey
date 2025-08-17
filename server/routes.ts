@@ -132,28 +132,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // GET /api/reviews/:slug - Get reviews for a firm
-  app.get('/api/reviews/:slug', async (req, res) => {
-    try {
-      const { slug } = req.params;
-      const { stars, sort = 'newest' } = req.query;
 
-      const reviewsData = await storage.getReviewsByFirmSlug(slug, {
-        stars: stars ? String(stars) : undefined,
-        sort: String(sort),
-      });
-      
-      res.set({
-        'Cache-Control': 'public, s-maxage=1800, stale-while-revalidate=3600',
-        'Content-Type': 'application/json',
-      });
-      
-      res.json(reviewsData);
-    } catch (error) {
-      console.error('Error fetching reviews:', error);
-      res.status(500).json({ message: 'Failed to fetch reviews' });
-    }
-  });
 
   // Admin API endpoints (basic auth would be implemented here)
   

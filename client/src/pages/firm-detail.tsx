@@ -199,16 +199,7 @@ export default function FirmDetail() {
                 
                 {/* Action Buttons */}
                 <div className="flex flex-wrap gap-3">
-                  <Button
-                    variant="outline"
-                    asChild
-                    data-testid="view-reviews-button"
-                  >
-                    <a href={`/${locale}/reviews/${firm.slug}`}>
-                      <i className="fas fa-star mr-2"></i>
-                      {t('nav.reviews')}
-                    </a>
-                  </Button>
+
                   {firm.trustpilotUrl && (
                     <Button
                       variant="outline"

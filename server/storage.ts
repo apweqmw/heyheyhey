@@ -55,10 +55,6 @@ export interface IStorage {
     sort?: string;
     search?: string;
   }): Promise<{ firms: any[] }>;
-  getReviewsByFirmSlug(slug: string, options?: {
-    stars?: string;
-    sort?: string;
-  }): Promise<{ reviews: any[]; stats: any }>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -424,127 +420,7 @@ export class DatabaseStorage implements IStorage {
     }
   }
 
-  async getReviewsByFirmSlug(slug: string, options: {
-    stars?: string;
-    sort?: string;
-  } = {}): Promise<{ reviews: any[]; stats: any }> {
-    try {
-      // Get firm details first
-      const [firm] = await db.select().from(firms).where(eq(firms.slug, slug));
-      
-      if (!firm) {
-        return { reviews: [], stats: { averageStars: 0, totalReviews: 0, distribution: {}, trustScore: 0 } };
-      }
 
-      // Get real Trustpilot data for this firm (slug-based mapping)
-      const realData = {
-        'ftmo': { rating: 4.8, reviews: 25710, trustScore: 95 },
-        'topstep': { rating: 4.3, reviews: 10928, trustScore: 88 },
-        'the-funded-trader': { rating: 4.2, reviews: 8432, trustScore: 84 },
-        'apex-trader-funding': { rating: 3.9, reviews: 5623, trustScore: 78 },
-        'myforexfunds': { rating: 4.1, reviews: 3456, trustScore: 82 },
-        'funded-next': { rating: 4.0, reviews: 2145, trustScore: 80 }
-      }[slug];
-
-      // Use real review data that matches Trustpilot ratings
-      const mockReviews = [
-        {
-          id: "1",
-          title: slug === 'ftmo' ? "Excellent educational platform" : "Great trading experience",
-          text: slug === 'ftmo' 
-            ? "FTMO provides excellent education and fair evaluation process. The support team is very professional and responsive. I successfully passed both phases and got funded."
-            : slug === 'topstep'
-            ? "Topstep has been fantastic for futures trading. The platform is stable and the evaluation rules are clear. Highly recommend for serious traders."
-            : "I've been trading with this firm for several months now and the experience has been excellent. Fast payouts and good customer support.",
-          stars: realData ? Math.round(realData.rating) : 5,
-          createdAt: "2025-08-10T10:30:00Z",
-          consumer: {
-            displayName: slug === 'ftmo' ? "TradingEducator" : "TradingPro123",
-            countryCode: "US"
-          },
-          businessReply: {
-            text: "Thank you for your positive feedback! We're glad to hear about your success with our platform.",
-            createdAt: "2025-08-11T09:15:00Z"
-          }
-        },
-        {
-          id: "2", 
-          title: "Professional and reliable",
-          text: slug === 'ftmo'
-            ? "The platform is very professional and user-friendly. The evaluation process was challenging but fair. Customer service responds quickly to queries."
-            : "The platform is very professional and user-friendly. The evaluation process was clear and fair.",
-          stars: realData ? Math.max(1, Math.round(realData.rating) - 1) : 4,
-          createdAt: "2025-08-05T14:20:00Z",
-          consumer: {
-            displayName: slug === 'ftmo' ? "FTMOSuccess" : "ForexTrader88",
-            countryCode: "GB"
-          }
-        },
-        {
-          id: "3",
-          title: realData && realData.rating >= 4.5 ? "Solid platform with room for improvement" : "Good but could be better",
-          text: slug === 'ftmo'
-            ? "Great educational resources and fair evaluation. The only minor issue is that some features could be more intuitive, but overall very satisfied."
-            : "Overall good experience but the spreads could be tighter during news events.",
-          stars: realData ? Math.max(1, Math.round(realData.rating) - 1) : 3,
-          createdAt: "2025-07-28T16:45:00Z",
-          consumer: {
-            displayName: "SwingTrader",
-            countryCode: "CA"
-          }
-        }
-      ];
-
-      const mockStats = {
-        averageStars: realData?.rating || 4.1,
-        totalReviews: realData?.reviews || 156,
-        distribution: realData ? {
-          "5": Math.round(realData.reviews * 0.5),
-          "4": Math.round(realData.reviews * 0.3),
-          "3": Math.round(realData.reviews * 0.15),
-          "2": Math.round(realData.reviews * 0.04),
-          "1": Math.round(realData.reviews * 0.01)
-        } : {
-          "5": 78,
-          "4": 45,
-          "3": 20,
-          "2": 8,
-          "1": 5
-        },
-        trustScore: realData?.trustScore || 85
-      };
-
-      // Apply filters
-      let filteredReviews = mockReviews;
-      
-      if (options.stars && options.stars !== 'all') {
-        const targetStars = parseInt(options.stars);
-        filteredReviews = mockReviews.filter(review => review.stars === targetStars);
-      }
-
-      // Apply sorting
-      switch (options.sort) {
-        case 'oldest':
-          filteredReviews.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
-          break;
-        case 'highest':
-          filteredReviews.sort((a, b) => b.stars - a.stars);
-          break;
-        case 'lowest':
-          filteredReviews.sort((a, b) => a.stars - b.stars);
-          break;
-        case 'newest':
-        default:
-          filteredReviews.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
-          break;
-      }
-
-      return { reviews: filteredReviews, stats: mockStats };
-    } catch (error) {
-      console.error('Error fetching reviews:', error);
-      return { reviews: [], stats: { averageStars: 0, totalReviews: 0, distribution: {}, trustScore: 0 } };
-    }
-  }
 }
 
 export const storage = new DatabaseStorage();

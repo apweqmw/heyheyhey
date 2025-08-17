@@ -74,7 +74,7 @@ function FirmReviewCard({ firm }: { firm: FirmReviewSummary }) {
               )}
             </div>
             <div className="flex-1 min-w-0">
-              <Link href={`/${locale}/reviews/${firm.slug}`}>
+              <Link href={`/${locale}/firms/${firm.slug}`}>
                 <h3 className="font-semibold text-lg hover:text-primary transition-colors truncate" data-testid={`firm-name-${firm.slug}`}>
                   {firm.name}
                 </h3>
@@ -128,11 +128,20 @@ function FirmReviewCard({ firm }: { firm: FirmReviewSummary }) {
             <p className="text-sm text-gray-700 dark:text-gray-300 line-clamp-2" data-testid={`recent-review-${firm.slug}`}>
               "{firm.recentReview.text}"
             </p>
-            <Link href={`/${locale}/reviews/${firm.slug}`}>
-              <Button variant="link" size="sm" className="p-0 h-auto mt-2">
-                {t('reviews.readMore')}
-              </Button>
-            </Link>
+            {firm.trustpilotUrl ? (
+              <a href={firm.trustpilotUrl} target="_blank" rel="noopener noreferrer">
+                <Button variant="link" size="sm" className="p-0 h-auto mt-2">
+                  <ExternalLink className="h-3 w-3 mr-1" />
+                  {t('reviews.readMore')} on Trustpilot
+                </Button>
+              </a>
+            ) : (
+              <Link href={`/${locale}/firms/${firm.slug}`}>
+                <Button variant="link" size="sm" className="p-0 h-auto mt-2">
+                  {t('reviews.readMore')}
+                </Button>
+              </Link>
+            )}
           </div>
         </CardContent>
       )}
