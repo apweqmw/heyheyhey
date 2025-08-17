@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useLocation } from "wouter";
 import Header from "@/components/header";
+import Footer from "@/components/footer";
 import FilterSortBar from "@/components/filter-sort-bar";
 import FirmListing from "@/components/firm-listing";
 import { useI18n } from "@/lib/i18n";
@@ -243,76 +244,7 @@ export default function Home() {
         </div>
       </main>
 
-      {/* Footer */}
-      <footer className="bg-gray-900 dark:bg-gray-950 text-white mt-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            {/* Brand */}
-            <div className="col-span-1">
-              <div className="flex items-center mb-4">
-                <div className="bg-primary text-primary-foreground p-2 rounded-lg mr-3">
-                  <i className="fas fa-chart-line text-xl"></i>
-                </div>
-                <span className="text-2xl font-bold">PropFirmMentor</span>
-              </div>
-              <p className="text-gray-400 text-sm mb-4">{t('footer.description')}</p>
-              <div className="flex space-x-4">
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                  <i className="fab fa-twitter"></i>
-                </a>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                  <i className="fab fa-discord"></i>
-                </a>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                  <i className="fab fa-telegram"></i>
-                </a>
-              </div>
-            </div>
-
-            {/* Navigation */}
-            <div>
-              <h4 className="font-semibold mb-4">{t('footer.navigation')}</h4>
-              <ul className="space-y-2 text-sm">
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">{t('nav.rankings')}</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">{t('nav.reviews')}</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">{t('nav.guides')}</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">{t('nav.news')}</a></li>
-              </ul>
-            </div>
-
-            {/* Resources */}
-            <div>
-              <h4 className="font-semibold mb-4">{t('footer.resources')}</h4>
-              <ul className="space-y-2 text-sm">
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">{t('footer.tradingRules')}</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">{t('footer.payoutComparison')}</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">{t('footer.platformGuide')}</a></li>
-              </ul>
-            </div>
-
-            {/* Legal */}
-            <div>
-              <h4 className="font-semibold mb-4">{t('footer.legal')}</h4>
-              <ul className="space-y-2 text-sm">
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">{t('footer.privacy')}</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">{t('footer.terms')}</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">{t('footer.disclaimer')}</a></li>
-              </ul>
-            </div>
-          </div>
-
-          {/* Bottom Bar */}
-          <div className="border-t border-gray-800 mt-8 pt-8 flex flex-col sm:flex-row justify-between items-center">
-            <p className="text-gray-400 text-sm">{t('footer.copyright')}</p>
-            <div className="flex items-center space-x-4 mt-4 sm:mt-0">
-              <div className="flex items-center space-x-2">
-                <div className="w-2 h-2 bg-success-500 rounded-full"></div>
-                <span className="text-gray-400 text-sm">{t('footer.operational')}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

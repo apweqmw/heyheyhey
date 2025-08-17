@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useI18n } from "@/lib/i18n";
 import { useSEO } from "@/lib/seo";
 import Header from "@/components/header";
+import Footer from "@/components/footer";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -386,6 +387,7 @@ Effective risk management is what separates successful prop traders from those w
           </CardContent>
         </Card>
       </main>
+      <Footer />
     </div>
   );
 }

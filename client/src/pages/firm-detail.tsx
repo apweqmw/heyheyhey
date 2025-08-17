@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useRoute } from "wouter";
 import { useEffect } from "react";
 import Header from "@/components/header";
+import Footer from "@/components/footer";
 import CountdownTimer from "@/components/countdown-timer";
 import EvaluationSteps from "@/components/evaluation-steps";
 import { useClipboard } from "@/hooks/use-clipboard";
@@ -612,6 +613,7 @@ export default function FirmDetail() {
           </div>
         </div>
       </main>
+      <Footer />
     </div>
   );
 }
